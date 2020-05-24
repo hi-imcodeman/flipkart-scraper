@@ -18,5 +18,10 @@
     "typescript": "^3.9.3",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "deepdash": "^5.0.3",
+    "fastq": "^1.8.0"
   }
 }
