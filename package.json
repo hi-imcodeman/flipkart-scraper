@@ -1,8 +1,8 @@
 {
-  "name": "typescript-template",
+  "name": "flipkart-scraper",
   "version": "1.0.0",
   "main": "dist/bundle.js",
-  "repository": "https://github.com/hi-imcodeman/typescript-template.git",
+  "repository": "https://github.com/hi-imcodeman/flipkart-scraper.git",
   "author": "Asraf Ali <asraf.cse@gmail.com>",
   "license": "MIT",
   "scripts": {
