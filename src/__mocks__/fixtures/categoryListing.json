@@ -1,0 +1,37 @@
+{
+    "title": "Flipkart Affiliate API Directory",
+    "description": "This directory contains links for Product Feed API and Delta Feed API of all categories with all the versions available",
+    "apiGroups": {
+        "affiliate": {
+            "name": "affiliate",
+            "apiListings": {
+                "food_nutrition": {
+                    "availableVariants": {
+                        "v1.1.0": {
+                            "resourceName": "food_nutrition",
+                            "put": null,
+                            "post": null,
+                            "get": "https://affiliate-api.flipkart.net/affiliate/1.0/feeds/hi-imcodeman/category/c1p1.json",
+                            "deltaGet": null,
+                            "delete": null
+                        }
+                    },
+                    "apiName": "food_nutrition"
+                },
+                "televisions": {
+                    "availableVariants": {
+                        "v1.1.0": {
+                            "resourceName": "televisions",
+                            "put": null,
+                            "post": null,
+                            "get": "https://affiliate-api.flipkart.net/affiliate/1.0/feeds/hi-imcodeman/category/c2p1.json",
+                            "deltaGet": null,
+                            "delete": null
+                        }
+                    },
+                    "apiName": "televisions"
+                }
+            }
+        }
+    }
+}
