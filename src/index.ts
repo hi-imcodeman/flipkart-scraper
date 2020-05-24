@@ -54,7 +54,6 @@ export default class FlipkartScraper extends EventEmitter {
                     this._enqueue(value)
                 }
             })
-            console.log(categoryListing);
             while (!this.queue.idle()) {
                 await sleep(1000)
             }
