@@ -15,6 +15,7 @@ jobs:
         # Defaults to the user or organization that owns the workflow file
         scope: '@hi-imcodeman'
     - run: npm install
+    - run: npm run gpr-setup
     - run: npm run build
     # Publish to GitHub Packages
     - run: npm publish
