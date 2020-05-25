@@ -2,7 +2,7 @@
 
 This package will help us to scrape all Flipkart products through Flipkart affiliate API
 
-# Installation
+## Installation
 
 Install using 'npm'
 
@@ -16,7 +16,7 @@ Install using 'yarn'
 yarn add flipkart-scraper
 ```
 
-# Usage
+## Usage
 
 ```javascript
 import flipkartScraper from "flipkart-scraper";
@@ -43,4 +43,34 @@ scraper.on("error", (error) => {
 
 // Start the scraper
 scraper.start();
+```
+
+## Options
+
+### Concurrency
+
+```javascript
+const scraper = new flipkartScraper(
+  "<Affiliate-Id-Here>",
+  "<Affiliate-Token-Here>",
+  {
+  concurrency: 5 // It will make 5 parallel request to Flipkart. This is optional param, default is set to 2
+  }
+);
+```
+
+### Max Request
+
+```javascript
+const scraper = new flipkartScraper(
+  "<Affiliate-Id-Here>",
+  "<Affiliate-Token-Here>",
+  {
+  /**
+  It will make only 500 request to Flipkart. After that program ends.
+  This is optional param, default is set to 0 means unlimited
+  **/
+  maxRequest: 500
+  }
+);
 ```
