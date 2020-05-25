@@ -1,5 +1,5 @@
 {
-  "name": "flipkart-scraper",
+  "name": "@hi-imcodeman/flipkart-scraper",
   "version": "1.0.4",
   "main": "dist/index.js",
   "repository": "https://github.com/hi-imcodeman/flipkart-scraper.git",
