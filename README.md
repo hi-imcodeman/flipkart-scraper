@@ -4,10 +4,14 @@ This package will help us to scrape all Flipkart products through Flipkart affil
 
 # Installation
 
+Install using 'npm'
+
 ```sh
-npm install flipkart-scraper
+npm i flipkart-scraper
 ```
-or
+
+Install using 'yarn'
+
 ```sh
 yarn add flipkart-scraper
 ```
@@ -15,26 +19,26 @@ yarn add flipkart-scraper
 # Usage
 
 ```javascript
-import flipkartScraper from 'flipkart-scraper';
+import flipkartScraper from "flipkart-scraper";
 
 const scraper = new flipkartScraper(
-    "<Affiliate-Id-Here>",
-    "<Affiliate-Token-Here>"
+  "<Affiliate-Id-Here>",
+  "<Affiliate-Token-Here>"
 );
 
 // 'response' event handler
-scraper.on('response', (response) => {
-    console.log(products);
+scraper.on("response", (response) => {
+  console.log(response);
 });
 
 // 'products' event handler
-scraper.on('products', (products) => {
-    console.log(products.products.length);
+scraper.on("products", (data) => {
+  console.log(data.products.length);
 });
 
 // Error handler
-scraper.on('error', (error) => {
-    console.error(error);
+scraper.on("error", (error) => {
+  console.error(error);
 });
 
 // Start the scraper
