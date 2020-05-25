@@ -1,11 +1,13 @@
 {
   "name": "flipkart-scraper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/index.js",
   "repository": "https://github.com/hi-imcodeman/flipkart-scraper.git",
   "author": "Asraf Ali <asraf.cse@gmail.com>",
   "license": "MIT",
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "build": "tsc",
     "test": "jest",
@@ -22,5 +24,30 @@
     "axios": "^0.19.2",
     "deepdash": "^5.0.3",
     "fastq": "^1.8.0"
-  }
+  },
+  "keywords": [
+    "flipkart",
+    "flipkart scraper",
+    "scraper",
+    "crawler",
+    "ecommerce",
+    "products scraper",
+    "shopping",
+    "indian online shopping",
+    "flipkart affiliate api",
+    "flipkart affiliate api client",
+    "affiliate api",
+    "affiliate client",
+    "flipkart affiliate client",
+    "flipkart client",
+    "affiliate",
+    "client",
+    "nodejs",
+    "typescript",
+    "flipkart api"
+  ],
+  "bugs": {
+    "url": "https://github.com/hi-imcodeman/flipkart-scraper/issues"
+  },
+  "homepage": "https://github.com/hi-imcodeman/flipkart-scraper#readme"
 }
