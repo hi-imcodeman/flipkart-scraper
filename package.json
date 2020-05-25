@@ -1,6 +1,6 @@
 {
   "name": "@hi-imcodeman/flipkart-scraper",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "dist/index.js",
   "repository": "https://github.com/hi-imcodeman/flipkart-scraper.git",
   "author": "Asraf Ali <asraf.cse@gmail.com>",
