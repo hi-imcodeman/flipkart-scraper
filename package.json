@@ -9,7 +9,7 @@
     "build": "tsc",
     "test": "jest",
     "coverage": "jest --coverage",
-    "gpr-setup": "node ./scripts/setup-gps.js"
+    "gpr-setup": "node ./scripts/setup-gpr.js"
   },
   "devDependencies": {
     "@types/jest": "^25.2.3",
