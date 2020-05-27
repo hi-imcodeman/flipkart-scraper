@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { EventEmitter } from 'events'
 import fastq from 'fastq'
+import { sleep } from './util'
 
 const eachDeep = require('deepdash/eachDeep')
 
@@ -11,18 +12,21 @@ interface ResponseObject {
     headers: object
     data: any
 }
+interface CompletedResponse {
+    httpResponse: ResponseObject
+    category: string
+    pageNo: number
+}
+
+interface EnqueuePrams {
+    url: string
+    category: string
+    pageNo: number
+}
 
 interface ScraperOptions {
     maxRequest?: number
     concurrency?: number
-}
-
-const sleep = (ms: number) => {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve()
-        }, ms)
-    })
 }
 
 export default class FlipkartScraper extends EventEmitter {
@@ -42,7 +46,7 @@ export default class FlipkartScraper extends EventEmitter {
         this.queue = fastq(this._worker.bind(this), this._concurrency)
         this.emit('ready')
     }
-    async start(): Promise<string> {
+    async start(categoriesToScrape: string[] = []): Promise<string> {
         return new Promise(async (resolve) => {
             const feedUrl = `${this._baseUrl}/affiliate/api/${this._affiliateId}.json`
             const { data: feedListing } = await this._getData(feedUrl)
@@ -51,7 +55,12 @@ export default class FlipkartScraper extends EventEmitter {
                 if (key === 'get') {
                     const resourceName: string = parent.resourceName
                     categoryListing[resourceName] = value
-                    this._enqueue(value)
+                    if (categoriesToScrape.length) {
+                        if (categoriesToScrape.includes(resourceName))
+                            this._enqueue({ url: value, pageNo: 1, category: resourceName })
+                    } else {
+                        this._enqueue({ url: value, pageNo: 1, category: resourceName })
+                    }
                 }
             })
             while (!this.queue.idle()) {
@@ -61,24 +70,26 @@ export default class FlipkartScraper extends EventEmitter {
             resolve('Completed')
         })
     }
-    private async _enqueue(url: string) {
+    private async _enqueue(params: EnqueuePrams) {
         this._requestedCount++
         if (this._maxRequest === 0 || this._requestedCount <= this._maxRequest)
-            this.queue.push(url, this._onComplete.bind(this))
+            this.queue.push(params, this._onComplete.bind(this))
     }
-    private async _worker(url: any, cb: any) {
+    private async _worker(params: EnqueuePrams, cb: any) {
         try {
-            const response = await this._getData(url)
-            cb(null, response)
+            const { url, category, pageNo } = params
+            const httpResponse = await this._getData(url)
+            cb(null, { httpResponse, category, pageNo })
         } catch (error) {
             cb(error, null)
         }
     }
-    private _onComplete(error: any, response: ResponseObject) {
+    private _onComplete(error: any, response: CompletedResponse) {
         if (error === null) {
-            this.emit('products', response.data)
-            if (response.data.nextUrl)
-                this._enqueue(response.data.nextUrl)
+            const { data: apiData, url } = response.httpResponse
+            this.emit('data', { url, apiData, category: response.category, pageNo: response.pageNo })
+            if (apiData.nextUrl)
+                this._enqueue({ url: apiData.nextUrl, category: response.category, pageNo: response.pageNo + 1 })
         } else {
             this.emit('error', error)
         }
