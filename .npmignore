@@ -2,3 +2,4 @@ src/
 .github/
 jest.config.js
 tsconfig.json
+scripts/
