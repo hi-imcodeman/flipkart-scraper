@@ -3,10 +3,24 @@
     "target": "es5",
     "module": "commonjs",
     "declaration": true,
+    "sourceMap": true,
     "outDir": "./dist",
-    "strict": true,
+    "strict": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
-  "files": ["src/index.ts"]
+  "exclude": [
+    "**/*.spec.ts",
+    "**/__mocks__",
+    "dist"
+  ],
+  "typedocOptions": {
+    "stripInternal": true,
+    "excludeExternals": true,
+    "excludePrivate": true,
+    "includeVersion": true,
+    "inputFiles": ["./src/index.ts"],
+    "mode": "file",
+    "out": "docs"
+  }
 }
