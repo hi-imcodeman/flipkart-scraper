@@ -9,6 +9,7 @@
     "build": "tsc",
     "test": "jest",
     "coverage": "jest --coverage",
+    "docs": "typedoc",
     "gpr-setup": "node ./scripts/setup-gpr.js"
   },
   "devDependencies": {
@@ -16,6 +17,7 @@
     "jest": "^26.0.1",
     "ts-jest": "^26.0.0",
     "ts-loader": "^7.0.4",
+    "typedoc": "^0.17.7",
     "typescript": "^3.9.3"
   },
   "dependencies": {

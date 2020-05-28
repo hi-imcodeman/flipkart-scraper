@@ -1,10 +1,12 @@
 import axios from 'axios'
 import { EventEmitter } from 'events'
 import fastq from 'fastq'
+import eachDeep from 'deepdash/eachDeep'
 import { sleep } from './util'
 
-const eachDeep = require('deepdash/eachDeep')
-
+/**
+ * @internal
+ */
 interface ResponseObject {
     url: string
     statusCode: number
@@ -12,12 +14,18 @@ interface ResponseObject {
     headers: object
     data: any
 }
+/**
+ * @internal
+ */
 interface CompletedResponse {
     httpResponse: ResponseObject
     category: string
     pageNo: number
 }
 
+/**
+ * @internal
+ */
 interface EnqueuePrams {
     url: string
     category: string
@@ -25,10 +33,19 @@ interface EnqueuePrams {
 }
 
 interface ScraperOptions {
+    /**
+     * Maximum request to Flipkart affliate server 
+     */
     maxRequest?: number
+    /**
+     * Number for parallel processing in the queue
+     */
     concurrency?: number
 }
 
+/**
+ * This the main class for Flipcart scraper
+ */
 export default class FlipkartScraper extends EventEmitter {
     private _affiliateId: string
     private _affiliateToken: string
@@ -37,6 +54,12 @@ export default class FlipkartScraper extends EventEmitter {
     private _maxRequest: number
     private _requestedCount: number = 0
     private _concurrency: number
+    /**
+     * This is constructor of FlipkartScraper
+     * @param affiliateId 
+     * @param affiliateToken 
+     * @param options 
+     */
     constructor(affiliateId: string, affiliateToken: string, options: ScraperOptions = {}) {
         super()
         this._affiliateId = affiliateId
@@ -46,6 +69,10 @@ export default class FlipkartScraper extends EventEmitter {
         this.queue = fastq(this._worker.bind(this), this._concurrency)
         this.emit('ready')
     }
+    /**
+     * 
+     * @param categoriesToScrape 
+     */
     async start(categoriesToScrape: string[] = []): Promise<string> {
         return new Promise(async (resolve) => {
             const feedUrl = `${this._baseUrl}/affiliate/api/${this._affiliateId}.json`
@@ -70,6 +97,10 @@ export default class FlipkartScraper extends EventEmitter {
             resolve('Completed')
         })
     }
+    /**
+     * 
+     * @param params 
+     */
     private async _enqueue(params: EnqueuePrams) {
         this._requestedCount++
         if (this._maxRequest === 0 || this._requestedCount <= this._maxRequest)
@@ -84,6 +115,11 @@ export default class FlipkartScraper extends EventEmitter {
             cb(error, null)
         }
     }
+    /**
+     * 
+     * @param error 
+     * @param response 
+     */
     private _onComplete(error: any, response: CompletedResponse) {
         if (error === null) {
             const { data: apiData, url } = response.httpResponse
@@ -94,6 +130,10 @@ export default class FlipkartScraper extends EventEmitter {
             this.emit('error', error)
         }
     }
+    /**
+     * 
+     * @param url 
+     */
     private async _getData(url: string): Promise<ResponseObject> {
         return new Promise(async (resolve, reject) => {
             try {
