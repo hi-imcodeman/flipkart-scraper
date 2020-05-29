@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ScraperOptions | flipkart-scraper - v1.1.0</title>
+	<title>ScrapedData | flipkart-scraper - v1.1.0</title>
 	<meta name="description" content="Documentation for flipkart-scraper - v1.1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -54,10 +54,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="scraperoptions.html">ScraperOptions</a>
+					<a href="scrapeddata.html">ScrapedData</a>
 				</li>
 			</ul>
-			<h1>Interface ScraperOptions</h1>
+			<h1>Interface ScrapedData</h1>
 		</div>
 	</div>
 </header>
@@ -68,7 +68,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ScraperOptions</span>
+						<span class="target">ScrapedData</span>
 					</li>
 				</ul>
 			</section>
@@ -79,8 +79,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="scraperoptions.html#concurrency" class="tsd-kind-icon">concurrency</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="scraperoptions.html#maxrequest" class="tsd-kind-icon">max<wbr>Request</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="scrapeddata.html#apidata" class="tsd-kind-icon">api<wbr>Data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="scrapeddata.html#category" class="tsd-kind-icon">category</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="scrapeddata.html#pageno" class="tsd-kind-icon">page<wbr>No</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="scrapeddata.html#url" class="tsd-kind-icon">url</a></li>
 							</ul>
 						</section>
 					</div>
@@ -89,34 +91,44 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="concurrency" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> concurrency</h3>
-					<div class="tsd-signature tsd-kind-icon">concurrency<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="apidata" class="tsd-anchor"></a>
+					<h3>api<wbr>Data</h3>
+					<div class="tsd-signature tsd-kind-icon">api<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/0c7bbab/src/index.ts#L43">src/index.ts:43</a></li>
+							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/0c7bbab/src/index.ts#L50">src/index.ts:50</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Number for parallel processing in the queue</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="maxrequest" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> max<wbr>Request</h3>
-					<div class="tsd-signature tsd-kind-icon">max<wbr>Request<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="category" class="tsd-anchor"></a>
+					<h3>category</h3>
+					<div class="tsd-signature tsd-kind-icon">category<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/0c7bbab/src/index.ts#L39">src/index.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/0c7bbab/src/index.ts#L51">src/index.ts:51</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Maximum request to Flipkart affliate server</p>
-						</div>
-					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="pageno" class="tsd-anchor"></a>
+					<h3>page<wbr>No</h3>
+					<div class="tsd-signature tsd-kind-icon">page<wbr>No<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/0c7bbab/src/index.ts#L52">src/index.ts:52</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="url" class="tsd-anchor"></a>
+					<h3>url</h3>
+					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/0c7bbab/src/index.ts#L49">src/index.ts:49</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -133,24 +145,30 @@
 					<li class=" tsd-kind-class">
 						<a href="../classes/flipkartscraper.html" class="tsd-kind-icon">Flipkart<wbr>Scraper</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="scrapeddata.html" class="tsd-kind-icon">Scraped<wbr>Data</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="scraperoptions.html" class="tsd-kind-icon">Scraper<wbr>Options</a>
+						<a href="scrapeddata.html" class="tsd-kind-icon">Scraped<wbr>Data</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="scraperoptions.html#concurrency" class="tsd-kind-icon">concurrency</a>
+								<a href="scrapeddata.html#apidata" class="tsd-kind-icon">api<wbr>Data</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="scraperoptions.html#maxrequest" class="tsd-kind-icon">max<wbr>Request</a>
+								<a href="scrapeddata.html#category" class="tsd-kind-icon">category</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="scrapeddata.html#pageno" class="tsd-kind-icon">page<wbr>No</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="scrapeddata.html#url" class="tsd-kind-icon">url</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface">
+						<a href="scraperoptions.html" class="tsd-kind-icon">Scraper<wbr>Options</a>
+					</li>
 					<li class=" tsd-kind-event">
 						<a href="../globals.html#completed" class="tsd-kind-icon">completed</a>
 					</li>
