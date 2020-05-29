@@ -11,7 +11,7 @@ interface ResponseObject {
     url: string
     statusCode: number
     statusText: string
-    headers: object
+    headers: any
     data: any
 }
 /**
@@ -41,19 +41,69 @@ interface ScraperOptions {
      * Number for parallel processing in the queue
      */
     concurrency?: number
+    /**
+     * Maximum number of pages to scrape per category
+     */
+    maxPage?: number
 }
 
+// { url, apiData, category: response.category, pageNo: response.pageNo }
+
+interface ScrapedData {
+    url: string
+    apiData: any,
+    category: string
+    pageNo: number
+}
+
+/** 
+ Emitted when successful HTTP response from the Flipkart Affiliate server.
+ * @memberof FlipkartScraper
+ * @event
+ */
+declare function response(response: ResponseObject): void;
+
+/** 
+ * Emitted when products returned from Flipkart affiliate API.
+ * @memberof FlipkartScraper
+ * @event
+ */
+declare function data(data: ScrapedData): void;
+
+/** 
+ * Emitted if any errors occured.
+ * @memberof FlipkartScraper
+ * @event
+ */
+declare function error(error: any): void;
+
+/** 
+ * Emitted when all products scraped by category.
+ * @memberof FlipkartScraper
+ * @event
+ */
+declare function completed(info: any): void;
+
+/** 
+ * Emitted when scraper finished
+ * @memberof FlipkartScraper
+ * @event
+ */
+declare function finished(message: string): void;
+
 /**
- * This the main class for Flipcart scraper
+ * This the main class for Flipkart scraper
  */
 export default class FlipkartScraper extends EventEmitter {
     private _affiliateId: string
     private _affiliateToken: string
-    private _baseUrl: string = 'https://affiliate-api.flipkart.net'
+    private _baseUrl = 'https://affiliate-api.flipkart.net'
     private queue: fastq.queue
     private _maxRequest: number
-    private _requestedCount: number = 0
+    private _requestedCount = 0
+    private _processedCount = 0
     private _concurrency: number
+    private _maxPage: number
     /**
      * This is constructor of FlipkartScraper
      * @param affiliateId 
@@ -66,6 +116,7 @@ export default class FlipkartScraper extends EventEmitter {
         this._affiliateToken = affiliateToken
         this._maxRequest = options.maxRequest || 0
         this._concurrency = options.concurrency || 2
+        this._maxPage = options.maxPage || 0
         this.queue = fastq(this._worker.bind(this), this._concurrency)
         this.emit('ready')
     }
@@ -74,8 +125,8 @@ export default class FlipkartScraper extends EventEmitter {
      * @param categoriesToScrape 
      */
     async start(categoriesToScrape: string[] = []): Promise<string> {
-        return new Promise(async (resolve) => {
-            const feedUrl = `${this._baseUrl}/affiliate/api/${this._affiliateId}.json`
+        const feedUrl = `${this._baseUrl}/affiliate/api/${this._affiliateId}.json`
+        try {
             const { data: feedListing } = await this._getData(feedUrl)
             const categoryListing: any = {}
             eachDeep(feedListing, (value: any, key: string, parent: { resourceName: string }) => {
@@ -93,9 +144,12 @@ export default class FlipkartScraper extends EventEmitter {
             while (!this.queue.idle()) {
                 await sleep(1000)
             }
-            this.emit('completed')
-            resolve('Completed')
-        })
+            this.emit('finished', { message: 'Scraping Completed', totalRequest: this._processedCount })
+            return Promise.resolve('finished')
+        } catch (error) {
+            this.emit('error', error)
+            return Promise.reject(error)
+        }
     }
     /**
      * 
@@ -121,11 +175,22 @@ export default class FlipkartScraper extends EventEmitter {
      * @param response 
      */
     private _onComplete(error: any, response: CompletedResponse) {
+        this._processedCount++
         if (error === null) {
             const { data: apiData, url } = response.httpResponse
-            this.emit('data', { url, apiData, category: response.category, pageNo: response.pageNo })
-            if (apiData.nextUrl)
-                this._enqueue({ url: apiData.nextUrl, category: response.category, pageNo: response.pageNo + 1 })
+            if (apiData.products.length)
+                this.emit('data', { url, apiData, category: response.category, pageNo: response.pageNo })
+            if (apiData.nextUrl) {
+                if (this._maxPage === 0 || response.pageNo < this._maxPage)
+                    this._enqueue({ url: apiData.nextUrl, category: response.category, pageNo: response.pageNo + 1 })
+            }
+            else {
+                this.emit('completed', {
+                    category: response.category,
+                    noOfPages: response.pageNo,
+                    totalProducts: apiData.products.length + ((response.pageNo - 1) * 500)
+                })
+            }
         } else {
             this.emit('error', error)
         }
@@ -135,21 +200,19 @@ export default class FlipkartScraper extends EventEmitter {
      * @param url 
      */
     private async _getData(url: string): Promise<ResponseObject> {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const response = await axios.get(url, {
-                    headers: {
-                        'Fk-Affiliate-Id': this._affiliateId,
-                        'Fk-Affiliate-Token': this._affiliateToken,
-                    }
-                })
-                const { status: statusCode, statusText, headers, data } = response
-                const responseInfo: ResponseObject = { url, statusCode, statusText, headers, data }
-                this.emit('response', responseInfo)
-                resolve(responseInfo)
-            } catch (error) {
-                reject(error)
-            }
-        })
+        try {
+            const response = await axios.get(url, {
+                headers: {
+                    'Fk-Affiliate-Id': this._affiliateId,
+                    'Fk-Affiliate-Token': this._affiliateToken,
+                }
+            })
+            const { status: statusCode, statusText, headers, data } = response
+            const responseInfo: ResponseObject = { url, statusCode, statusText, headers, data }
+            this.emit('response', responseInfo)
+            return Promise.resolve(responseInfo)
+        } catch (error) {
+            return Promise.reject(error)
+        }
     }
 }

@@ -1,12 +1,13 @@
-const categoryListing = require('./fixtures/categoryListing.json')
-const c1p1 = require('./fixtures/c1p1.json')
-const c1p2 = require('./fixtures/c1p2.json')
-const c2p1 = require('./fixtures/c2p1.json')
-const c2p2 = require('./fixtures/c2p2.json')
-const axios: any = jest.genMockFromModule('axios')
+import categoryListing from './fixtures/categoryListing.json'
+import c1p1 from './fixtures/c1p1.json'
+import c1p2 from './fixtures/c1p2.json'
+import c2p1 from './fixtures/c2p1.json'
+import c2p2 from './fixtures/c2p2.json'
+import axios, { AxiosRequestConfig } from 'axios'
+const mockAxios: any = jest.genMockFromModule('axios')
 
-axios.get = (url: string, config: object) => {
-    let response = {
+mockAxios.get = (url: string, config: AxiosRequestConfig) => {
+    const response = {
         status: 200,
         statusText: 'OK',
         data: null,
@@ -34,4 +35,4 @@ axios.get = (url: string, config: object) => {
     }
 }
 
-export default axios
+export default mockAxios

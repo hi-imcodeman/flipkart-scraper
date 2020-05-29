@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>flipkart-scraper - v1.0.6</title>
-	<meta name="description" content="Documentation for flipkart-scraper - v1.0.6">
+	<title>flipkart-scraper - v1.1.0</title>
+	<meta name="description" content="Documentation for flipkart-scraper - v1.1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">flipkart-scraper - v1.0.6</a>
+					<a href="index.html" class="title">flipkart-scraper - v1.1.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1>flipkart-scraper - v1.0.6</h1>
+			<h1>flipkart-scraper - v1.1.0</h1>
 		</div>
 	</div>
 </header>
@@ -83,50 +83,107 @@
   <span class="hljs-string">"&lt;Affiliate-Token-Here&gt;"</span>
 );
 
-<span class="hljs-comment">// 'response' event handler</span>
-scraper.on(<span class="hljs-string">"response"</span>, (response) =&gt; {
-  <span class="hljs-built_in">console</span>.log(response);
-});
-
-<span class="hljs-comment">// 'products' event handler</span>
-scraper.on(<span class="hljs-string">"products"</span>, (data) =&gt; {
+<span class="hljs-comment">// 'data' event handler</span>
+scraper.on(<span class="hljs-string">"data"</span>, (data) =&gt; {
   <span class="hljs-built_in">console</span>.log(data.products.length);
-});
-
-<span class="hljs-comment">// Error handler</span>
-scraper.on(<span class="hljs-string">"error"</span>, (error) =&gt; {
-  <span class="hljs-built_in">console</span>.error(error);
 });
 
 <span class="hljs-comment">// Start the scraper</span>
 scraper.start();</code></pre>
-				<a href="#options" id="options" style="color: inherit; text-decoration: none;">
-					<h2>Options</h2>
+				<a href="#class-flipkartscraper" id="class-flipkartscraper" style="color: inherit; text-decoration: none;">
+					<h2>Class: FlipkartScraper</h2>
 				</a>
-				<a href="#concurrency" id="concurrency" style="color: inherit; text-decoration: none;">
-					<h3>Concurrency</h3>
+				<ul>
+					<li>extends <a href="https://nodejs.org/api/events.html#events_class_eventemitter">EventEmitter</a></li>
+				</ul>
+				<p>This module will help us to scrape all the Flipkart products.</p>
+				<a href="#constructoraffiliateid-affiliatetoken-options" id="constructoraffiliateid-affiliatetoken-options" style="color: inherit; text-decoration: none;">
+					<h3>constructor(affiliateId, affiliateToken, [options])</h3>
 				</a>
+				<p>This will create instance of the <code>FlipkartScraper</code> class with required authentication params.</p>
+				<ul>
+					<li>options {object}<ul>
+							<li><code>concurrency?</code> {number} Number for parallel processing in the queue, Default set to <code>2</code></li>
+							<li><code>maxRequest?</code> {number} Maximum request to Flipkart affliate server, Default set to <code>0</code> - means unlimited</li>
+							<li><code>maxPage?</code> {number} Maximum number of pages to scrape per category, Default set to <code>0</code> - means unlimited</li>
+						</ul>
+					</li>
+				</ul>
+				<p><strong>Example</strong></p>
 				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> scraper = <span class="hljs-keyword">new</span> flipkartScraper(
   <span class="hljs-string">"&lt;Affiliate-Id-Here&gt;"</span>,
   <span class="hljs-string">"&lt;Affiliate-Token-Here&gt;"</span>,
   {
-  <span class="hljs-attr">concurrency</span>: <span class="hljs-number">5</span> <span class="hljs-comment">// It will make 5 parallel request to Flipkart. This is optional param, default is set to 2</span>
+    <span class="hljs-comment">/**
+     * It will make 5 parallel request to Flipkart.
+     * This is optional param, default is set to 2
+     **/</span>
+    <span class="hljs-attr">concurrency</span>: <span class="hljs-number">5</span>,
+    <span class="hljs-comment">/**
+     * It will make only 500 request to Flipkart. After that program ends.
+     * This is optional param, default is set to 0 means unlimited
+     **/</span>
+    <span class="hljs-attr">maxRequest</span>: <span class="hljs-number">500</span>,
+    <span class="hljs-comment">/**
+     * Maximum 3 request per category
+     **/</span>
+    <span class="hljs-attr">maxPage</span>: <span class="hljs-number">3</span>,
   }
 );</code></pre>
-				<a href="#max-request" id="max-request" style="color: inherit; text-decoration: none;">
-					<h3>Max Request</h3>
+				<a href="#scraperstartcategoriestoscrape" id="scraperstartcategoriestoscrape" style="color: inherit; text-decoration: none;">
+					<h3>scraper.start([categoriesToScrape])</h3>
 				</a>
-				<pre><code class="language-javascript"><span class="hljs-keyword">const</span> scraper = <span class="hljs-keyword">new</span> flipkartScraper(
-  <span class="hljs-string">"&lt;Affiliate-Id-Here&gt;"</span>,
-  <span class="hljs-string">"&lt;Affiliate-Token-Here&gt;"</span>,
-  {
-  <span class="hljs-comment">/**
-  It will make only 500 request to Flipkart. After that program ends.
-  This is optional param, default is set to 0 means unlimited
-  **/</span>
-  <span class="hljs-attr">maxRequest</span>: <span class="hljs-number">500</span>
-  }
-);</code></pre>
+				<p>This method will start scraping through Flipkart affiliate API.</p>
+				<ul>
+					<li><code>categoriesToScrape?</code> {string[]} Pass the list of categories that you want to scrape. Default set to <code>[]</code> which means all categories.</li>
+				</ul>
+				<p><strong>Example</strong></p>
+				<pre><code class="language-javascript">scraper.start([<span class="hljs-string">"telivision"</span>, <span class="hljs-string">"mobiles"</span>]); <span class="hljs-comment">// It will scrape only specified categories</span></code></pre>
+				<a href="#events-39response39" id="events-39response39" style="color: inherit; text-decoration: none;">
+					<h3>events: &#39;response&#39;</h3>
+				</a>
+				<p>Emitted when successful HTTP response from the Flipkart Affiliate server.</p>
+				<p><strong>Example</strong></p>
+				<pre><code class="language-javascript"><span class="hljs-comment">// 'response' event handler</span>
+scraper.on(<span class="hljs-string">"response"</span>, (response) =&gt; {
+  <span class="hljs-built_in">console</span>.log(response);
+});</code></pre>
+				<a href="#events-39data39" id="events-39data39" style="color: inherit; text-decoration: none;">
+					<h3>events: &#39;data&#39;</h3>
+				</a>
+				<p>Emitted when products returned from Flipkart affiliate API.</p>
+				<p><strong>Example</strong></p>
+				<pre><code class="language-javascript"><span class="hljs-comment">// 'data' event handler</span>
+scraper.on(<span class="hljs-string">"data"</span>, (data) =&gt; {
+  <span class="hljs-built_in">console</span>.log(data.apiData.products);
+});</code></pre>
+				<a href="#events-39completed39" id="events-39completed39" style="color: inherit; text-decoration: none;">
+					<h3>events: &#39;completed&#39;</h3>
+				</a>
+				<p>Emitted when all products scraped by category.</p>
+				<p><strong>Example</strong></p>
+				<pre><code class="language-javascript"><span class="hljs-comment">// 'completed' event handler</span>
+scraper.on(<span class="hljs-string">"completed"</span>, (info) =&gt; {
+  <span class="hljs-built_in">console</span>.log(info);
+});</code></pre>
+				<a href="#events-39finished39" id="events-39finished39" style="color: inherit; text-decoration: none;">
+					<h3>events: &#39;finished&#39;</h3>
+				</a>
+				<p>Emitted when scraper finished</p>
+				<p><strong>Example</strong></p>
+				<pre><code class="language-javascript"><span class="hljs-comment">// 'finished' event handler</span>
+scraper.on(<span class="hljs-string">"finished"</span>, (info) =&gt; {
+  <span class="hljs-built_in">console</span>.log(info);
+});</code></pre>
+				<a href="#events-39error39" id="events-39error39" style="color: inherit; text-decoration: none;">
+					<h3>events: &#39;error&#39;</h3>
+				</a>
+				<p>Emitted if any errors occured.</p>
+				<p><strong>Example</strong></p>
+				<pre><code class="language-javascript"><span class="hljs-comment">// Error handler</span>
+scraper.on(<span class="hljs-string">"error"</span>, (error) =&gt; {
+  <span class="hljs-built_in">console</span>.error(error);
+});</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -143,7 +200,25 @@ scraper.start();</code></pre>
 						<a href="classes/flipkartscraper.html" class="tsd-kind-icon">Flipkart<wbr>Scraper</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/scrapeddata.html" class="tsd-kind-icon">Scraped<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/scraperoptions.html" class="tsd-kind-icon">Scraper<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="globals.html#completed" class="tsd-kind-icon">completed</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="globals.html#data" class="tsd-kind-icon">data</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="globals.html#error" class="tsd-kind-icon">error</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="globals.html#finished" class="tsd-kind-icon">finished</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="globals.html#response" class="tsd-kind-icon">response</a>
 					</li>
 				</ul>
 			</nav>

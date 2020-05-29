@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>flipkart-scraper - v1.0.6</title>
-	<meta name="description" content="Documentation for flipkart-scraper - v1.0.6">
+	<title>flipkart-scraper - v1.1.0</title>
+	<meta name="description" content="Documentation for flipkart-scraper - v1.1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">flipkart-scraper - v1.0.6</a>
+					<a href="index.html" class="title">flipkart-scraper - v1.1.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -54,7 +54,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1>flipkart-scraper - v1.0.6</h1>
+			<h1>flipkart-scraper - v1.1.0</h1>
 		</div>
 	</div>
 </header>
@@ -74,10 +74,189 @@
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface"><a href="interfaces/scrapeddata.html" class="tsd-kind-icon">Scraped<wbr>Data</a></li>
 								<li class="tsd-kind-interface"><a href="interfaces/scraperoptions.html" class="tsd-kind-icon">Scraper<wbr>Options</a></li>
 							</ul>
 						</section>
+						<section class="tsd-index-section ">
+							<h3>Events</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-event"><a href="globals.html#completed" class="tsd-kind-icon">completed</a></li>
+								<li class="tsd-kind-event"><a href="globals.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-event"><a href="globals.html#error" class="tsd-kind-icon">error</a></li>
+								<li class="tsd-kind-event"><a href="globals.html#finished" class="tsd-kind-icon">finished</a></li>
+								<li class="tsd-kind-event"><a href="globals.html#response" class="tsd-kind-icon">response</a></li>
+							</ul>
+						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Events</h2>
+				<section class="tsd-panel tsd-member tsd-kind-event">
+					<a name="completed" class="tsd-anchor"></a>
+					<h3>completed</h3>
+					<ul class="tsd-signatures tsd-kind-event">
+						<li class="tsd-signature tsd-kind-icon">completed<span class="tsd-signature-symbol">(</span>info<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/c4cb440/src/index.ts#L85">src/index.ts:85</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Emitted when all products scraped by category.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>FlipkartScraper</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>info: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-event">
+					<a name="data" class="tsd-anchor"></a>
+					<h3>data</h3>
+					<ul class="tsd-signatures tsd-kind-event">
+						<li class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><a href="interfaces/scrapeddata.html" class="tsd-signature-type">ScrapedData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/c4cb440/src/index.ts#L71">src/index.ts:71</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Emitted when products returned from Flipkart affiliate API.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>FlipkartScraper</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>data: <a href="interfaces/scrapeddata.html" class="tsd-signature-type">ScrapedData</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-event">
+					<a name="error" class="tsd-anchor"></a>
+					<h3>error</h3>
+					<ul class="tsd-signatures tsd-kind-event">
+						<li class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/c4cb440/src/index.ts#L78">src/index.ts:78</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Emitted if any errors occured.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>FlipkartScraper</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>error: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-event">
+					<a name="finished" class="tsd-anchor"></a>
+					<h3>finished</h3>
+					<ul class="tsd-signatures tsd-kind-event">
+						<li class="tsd-signature tsd-kind-icon">finished<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/c4cb440/src/index.ts#L92">src/index.ts:92</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Emitted when scraper finished</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>FlipkartScraper</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>message: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-event">
+					<a name="response" class="tsd-anchor"></a>
+					<h3>response</h3>
+					<ul class="tsd-signatures tsd-kind-event">
+						<li class="tsd-signature tsd-kind-icon">response<span class="tsd-signature-symbol">(</span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ResponseObject</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/c4cb440/src/index.ts#L64">src/index.ts:64</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Emitted when successful HTTP response from the Flipkart Affiliate server.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>FlipkartScraper</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>response: <span class="tsd-signature-type">ResponseObject</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -95,7 +274,25 @@
 						<a href="classes/flipkartscraper.html" class="tsd-kind-icon">Flipkart<wbr>Scraper</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/scrapeddata.html" class="tsd-kind-icon">Scraped<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/scraperoptions.html" class="tsd-kind-icon">Scraper<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="globals.html#completed" class="tsd-kind-icon">completed</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="globals.html#data" class="tsd-kind-icon">data</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="globals.html#error" class="tsd-kind-icon">error</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="globals.html#finished" class="tsd-kind-icon">finished</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="globals.html#response" class="tsd-kind-icon">response</a>
 					</li>
 				</ul>
 			</nav>

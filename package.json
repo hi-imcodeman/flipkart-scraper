@@ -1,6 +1,6 @@
 {
   "name": "flipkart-scraper",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "main": "dist/index.js",
   "repository": "https://github.com/hi-imcodeman/flipkart-scraper.git",
   "author": "Asraf Ali <asraf.cse@gmail.com>",
@@ -10,11 +10,27 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "docs": "typedoc",
-    "gpr-setup": "node ./scripts/setup-gpr.js"
+    "gpr-setup": "node ./scripts/setup-gpr.js",
+    "lint": "eslint . --ext .ts"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx,js,jsx}": [
+      "yarn lint --fix", "git add", "yarn docs"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged && yarn coverage"
+    }
   },
   "devDependencies": {
     "@types/jest": "^25.2.3",
+    "@typescript-eslint/eslint-plugin": "^3.0.2",
+    "@typescript-eslint/parser": "^3.0.2",
+    "eslint": "^7.1.0",
+    "husky": "^4.2.5",
     "jest": "^26.0.1",
+    "lint-staged": "^10.2.7",
     "ts-jest": "^26.0.0",
     "ts-loader": "^7.0.4",
     "typedoc": "^0.17.7",
@@ -49,5 +65,5 @@
   "bugs": {
     "url": "https://github.com/hi-imcodeman/flipkart-scraper/issues"
   },
-  "homepage": "https://github.com/hi-imcodeman/flipkart-scraper#readme"
+  "homepage": "https://hi-imcodeman.github.io/flipkart-scraper"
 }
