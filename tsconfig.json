@@ -16,6 +16,7 @@
   ],
   "typedocOptions": {
     "stripInternal": true,
+    "resolveJsonModule": true,
     "excludeExternals": true,
     "excludePrivate": true,
     "includeVersion": true,
