@@ -104,7 +104,8 @@ scraper.start();</code></pre>
 				<ul>
 					<li>options {object}<ul>
 							<li><code>concurrency?</code> {number} Number for parallel processing in the queue, Default set to <code>2</code></li>
-							<li><code>maxRequest?</code> {number} Maximum request to Flipkart affliate server, Default set to <code>0</code> - means unlimited.</li>
+							<li><code>maxRequest?</code> {number} Maximum request to Flipkart affliate server, Default set to <code>0</code> - means unlimited</li>
+							<li><code>maxPage?</code> {number} Maximum number of pages to scrape per category, Default set to <code>0</code> - means unlimited</li>
 						</ul>
 					</li>
 				</ul>
@@ -123,6 +124,10 @@ scraper.start();</code></pre>
      * This is optional param, default is set to 0 means unlimited
      **/</span>
     <span class="hljs-attr">maxRequest</span>: <span class="hljs-number">500</span>,
+    <span class="hljs-comment">/**
+     * Maximum 3 request per category
+     **/</span>
+    <span class="hljs-attr">maxPage</span>: <span class="hljs-number">3</span>,
   }
 );</code></pre>
 				<a href="#scraperstartcategoriestoscrape" id="scraperstartcategoriestoscrape" style="color: inherit; text-decoration: none;">
@@ -152,14 +157,23 @@ scraper.on(<span class="hljs-string">"response"</span>, (response) =&gt; {
 scraper.on(<span class="hljs-string">"data"</span>, (data) =&gt; {
   <span class="hljs-built_in">console</span>.log(data.apiData.products);
 });</code></pre>
-				<a href="#events-39complete39" id="events-39complete39" style="color: inherit; text-decoration: none;">
-					<h3>events: &#39;complete&#39;</h3>
+				<a href="#events-39completed39" id="events-39completed39" style="color: inherit; text-decoration: none;">
+					<h3>events: &#39;completed&#39;</h3>
 				</a>
-				<p>Emitted when scraping gets completed.</p>
+				<p>Emitted when all products scraped by category.</p>
 				<p><strong>Example</strong></p>
 				<pre><code class="language-javascript"><span class="hljs-comment">// 'completed' event handler</span>
-scraper.on(<span class="hljs-string">"completed"</span>, (msg) =&gt; {
-  <span class="hljs-built_in">console</span>.log(msg);
+scraper.on(<span class="hljs-string">"completed"</span>, (info) =&gt; {
+  <span class="hljs-built_in">console</span>.log(info);
+});</code></pre>
+				<a href="#events-39finished39" id="events-39finished39" style="color: inherit; text-decoration: none;">
+					<h3>events: &#39;finished&#39;</h3>
+				</a>
+				<p>Emitted when scraper finished</p>
+				<p><strong>Example</strong></p>
+				<pre><code class="language-javascript"><span class="hljs-comment">// 'finished' event handler</span>
+scraper.on(<span class="hljs-string">"finished"</span>, (info) =&gt; {
+  <span class="hljs-built_in">console</span>.log(info);
 });</code></pre>
 				<a href="#events-39error39" id="events-39error39" style="color: inherit; text-decoration: none;">
 					<h3>events: &#39;error&#39;</h3>
@@ -199,6 +213,9 @@ scraper.on(<span class="hljs-string">"error"</span>, (error) =&gt; {
 					</li>
 					<li class=" tsd-kind-event">
 						<a href="globals.html#error" class="tsd-kind-icon">error</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="globals.html#finished" class="tsd-kind-icon">finished</a>
 					</li>
 					<li class=" tsd-kind-event">
 						<a href="globals.html#response" class="tsd-kind-icon">response</a>
