@@ -11,7 +11,7 @@ interface ResponseObject {
     url: string
     statusCode: number
     statusText: string
-    headers: object
+    headers: any
     data: any
 }
 /**
@@ -52,7 +52,7 @@ export default class FlipkartScraper extends EventEmitter {
     private _baseUrl = 'https://affiliate-api.flipkart.net'
     private queue: fastq.queue
     private _maxRequest: number
-    private _requestedCount: number = 0
+    private _requestedCount = 0
     private _concurrency: number
     /**
      * This is constructor of FlipkartScraper
@@ -74,28 +74,26 @@ export default class FlipkartScraper extends EventEmitter {
      * @param categoriesToScrape 
      */
     async start(categoriesToScrape: string[] = []): Promise<string> {
-        return new Promise(async (resolve) => {
-            const feedUrl = `${this._baseUrl}/affiliate/api/${this._affiliateId}.json`
-            const { data: feedListing } = await this._getData(feedUrl)
-            const categoryListing: any = {}
-            eachDeep(feedListing, (value: any, key: string, parent: { resourceName: string }) => {
-                if (key === 'get') {
-                    const resourceName: string = parent.resourceName
-                    categoryListing[resourceName] = value
-                    if (categoriesToScrape.length) {
-                        if (categoriesToScrape.includes(resourceName))
-                            this._enqueue({ url: value, pageNo: 1, category: resourceName })
-                    } else {
+        const feedUrl = `${this._baseUrl}/affiliate/api/${this._affiliateId}.json`
+        const { data: feedListing } = await this._getData(feedUrl)
+        const categoryListing: any = {}
+        eachDeep(feedListing, (value: any, key: string, parent: { resourceName: string }) => {
+            if (key === 'get') {
+                const resourceName: string = parent.resourceName
+                categoryListing[resourceName] = value
+                if (categoriesToScrape.length) {
+                    if (categoriesToScrape.includes(resourceName))
                         this._enqueue({ url: value, pageNo: 1, category: resourceName })
-                    }
+                } else {
+                    this._enqueue({ url: value, pageNo: 1, category: resourceName })
                 }
-            })
-            while (!this.queue.idle()) {
-                await sleep(1000)
             }
-            this.emit('completed')
-            resolve('Completed')
         })
+        while (!this.queue.idle()) {
+            await sleep(1000)
+        }
+        this.emit('completed')
+        return Promise.resolve('Completed')
     }
     /**
      * 
@@ -135,21 +133,19 @@ export default class FlipkartScraper extends EventEmitter {
      * @param url 
      */
     private async _getData(url: string): Promise<ResponseObject> {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const response = await axios.get(url, {
-                    headers: {
-                        'Fk-Affiliate-Id': this._affiliateId,
-                        'Fk-Affiliate-Token': this._affiliateToken,
-                    }
-                })
-                const { status: statusCode, statusText, headers, data } = response
-                const responseInfo: ResponseObject = { url, statusCode, statusText, headers, data }
-                this.emit('response', responseInfo)
-                resolve(responseInfo)
-            } catch (error) {
-                reject(error)
-            }
-        })
+        try {
+            const response = await axios.get(url, {
+                headers: {
+                    'Fk-Affiliate-Id': this._affiliateId,
+                    'Fk-Affiliate-Token': this._affiliateToken,
+                }
+            })
+            const { status: statusCode, statusText, headers, data } = response
+            const responseInfo: ResponseObject = { url, statusCode, statusText, headers, data }
+            this.emit('response', responseInfo)
+            return Promise.resolve(responseInfo)
+        } catch (error) {
+            return Promise.reject(error)
+        }
     }
 }
