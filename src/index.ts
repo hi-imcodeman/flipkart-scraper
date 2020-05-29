@@ -41,6 +41,10 @@ interface ScraperOptions {
      * Number for parallel processing in the queue
      */
     concurrency?: number
+    /**
+     * Maximum number of pages to scrape per category
+     */
+    maxPage?: number
 }
 
 // { url, apiData, category: response.category, pageNo: response.pageNo }
@@ -74,11 +78,18 @@ declare function data(data: ScrapedData): void;
 declare function error(error: any): void;
 
 /** 
- * Emitted when scraping gets completed.
+ * Emitted when all products scraped by category.
  * @memberof FlipkartScraper
  * @event
  */
-declare function completed(info: string): void;
+declare function completed(info: any): void;
+
+/** 
+ * Emitted when scraper finished
+ * @memberof FlipkartScraper
+ * @event
+ */
+declare function finished(message: string): void;
 
 /**
  * This the main class for Flipkart scraper
@@ -90,7 +101,9 @@ export default class FlipkartScraper extends EventEmitter {
     private queue: fastq.queue
     private _maxRequest: number
     private _requestedCount = 0
+    private _processedCount = 0
     private _concurrency: number
+    private _maxPage: number
     /**
      * This is constructor of FlipkartScraper
      * @param affiliateId 
@@ -103,6 +116,7 @@ export default class FlipkartScraper extends EventEmitter {
         this._affiliateToken = affiliateToken
         this._maxRequest = options.maxRequest || 0
         this._concurrency = options.concurrency || 2
+        this._maxPage = options.maxPage || 0
         this.queue = fastq(this._worker.bind(this), this._concurrency)
         this.emit('ready')
     }
@@ -112,25 +126,30 @@ export default class FlipkartScraper extends EventEmitter {
      */
     async start(categoriesToScrape: string[] = []): Promise<string> {
         const feedUrl = `${this._baseUrl}/affiliate/api/${this._affiliateId}.json`
-        const { data: feedListing } = await this._getData(feedUrl)
-        const categoryListing: any = {}
-        eachDeep(feedListing, (value: any, key: string, parent: { resourceName: string }) => {
-            if (key === 'get') {
-                const resourceName: string = parent.resourceName
-                categoryListing[resourceName] = value
-                if (categoriesToScrape.length) {
-                    if (categoriesToScrape.includes(resourceName))
+        try {
+            const { data: feedListing } = await this._getData(feedUrl)
+            const categoryListing: any = {}
+            eachDeep(feedListing, (value: any, key: string, parent: { resourceName: string }) => {
+                if (key === 'get') {
+                    const resourceName: string = parent.resourceName
+                    categoryListing[resourceName] = value
+                    if (categoriesToScrape.length) {
+                        if (categoriesToScrape.includes(resourceName))
+                            this._enqueue({ url: value, pageNo: 1, category: resourceName })
+                    } else {
                         this._enqueue({ url: value, pageNo: 1, category: resourceName })
-                } else {
-                    this._enqueue({ url: value, pageNo: 1, category: resourceName })
+                    }
                 }
+            })
+            while (!this.queue.idle()) {
+                await sleep(1000)
             }
-        })
-        while (!this.queue.idle()) {
-            await sleep(1000)
+            this.emit('finished', { message: 'Scraping Completed', totalRequest: this._processedCount })
+            return Promise.resolve('finished')
+        } catch (error) {
+            this.emit('error', error)
+            return Promise.reject(error)
         }
-        this.emit('completed')
-        return Promise.resolve('Completed')
     }
     /**
      * 
@@ -156,12 +175,22 @@ export default class FlipkartScraper extends EventEmitter {
      * @param response 
      */
     private _onComplete(error: any, response: CompletedResponse) {
+        this._processedCount++
         if (error === null) {
             const { data: apiData, url } = response.httpResponse
             if (apiData.products.length)
                 this.emit('data', { url, apiData, category: response.category, pageNo: response.pageNo })
-            if (apiData.nextUrl)
-                this._enqueue({ url: apiData.nextUrl, category: response.category, pageNo: response.pageNo + 1 })
+            if (apiData.nextUrl) {
+                if (this._maxPage === 0 || response.pageNo < this._maxPage)
+                    this._enqueue({ url: apiData.nextUrl, category: response.category, pageNo: response.pageNo + 1 })
+            }
+            else {
+                this.emit('completed', {
+                    category: response.category,
+                    noOfPages: response.pageNo,
+                    totalProducts: apiData.products.length + ((response.pageNo - 1) * 500)
+                })
+            }
         } else {
             this.emit('error', error)
         }

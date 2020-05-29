@@ -35,4 +35,4 @@ mockAxios.get = (url: string, config: AxiosRequestConfig) => {
     }
 }
 
-export default axios
+export default mockAxios
