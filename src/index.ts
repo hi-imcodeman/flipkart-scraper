@@ -43,8 +43,45 @@ interface ScraperOptions {
     concurrency?: number
 }
 
+// { url, apiData, category: response.category, pageNo: response.pageNo }
+
+interface ScrapedData {
+    url: string
+    apiData: any,
+    category: string
+    pageNo: number
+}
+
+/** 
+ Emitted when successful HTTP response from the Flipkart Affiliate server.
+ * @memberof FlipkartScraper
+ * @event
+ */
+declare function response(response: ResponseObject): void;
+
+/** 
+ * Emitted when products returned from Flipkart affiliate API.
+ * @memberof FlipkartScraper
+ * @event
+ */
+declare function data(data: ScrapedData): void;
+
+/** 
+ * Emitted if any errors occured.
+ * @memberof FlipkartScraper
+ * @event
+ */
+declare function error(error: any): void;
+
+/** 
+ * Emitted when scraping gets completed.
+ * @memberof FlipkartScraper
+ * @event
+ */
+declare function completed(info: string): void;
+
 /**
- * This the main class for Flipcart scraper
+ * This the main class for Flipkart scraper
  */
 export default class FlipkartScraper extends EventEmitter {
     private _affiliateId: string
@@ -121,7 +158,8 @@ export default class FlipkartScraper extends EventEmitter {
     private _onComplete(error: any, response: CompletedResponse) {
         if (error === null) {
             const { data: apiData, url } = response.httpResponse
-            this.emit('data', { url, apiData, category: response.category, pageNo: response.pageNo })
+            if (apiData.products.length)
+                this.emit('data', { url, apiData, category: response.category, pageNo: response.pageNo })
             if (apiData.nextUrl)
                 this._enqueue({ url: apiData.nextUrl, category: response.category, pageNo: response.pageNo + 1 })
         } else {
