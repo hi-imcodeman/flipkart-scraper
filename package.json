@@ -15,12 +15,12 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,js,jsx}": [
-      "yarn lint --fix", "yarn coverage", "yarn docs", "git add"
+      "yarn lint --fix", "git add"
     ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged && yarn coverage && yarn docs"
     }
   },
   "devDependencies": {
