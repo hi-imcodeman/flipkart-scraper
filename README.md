@@ -47,7 +47,8 @@ This will create instance of the `FlipkartScraper` class with required authentic
 
 - options {object}
   - `concurrency?` {number} Number for parallel processing in the queue, Default set to `2`
-  - `maxRequest?` {number} Maximum request to Flipkart affliate server, Default set to `0` - means unlimited.
+  - `maxRequest?` {number} Maximum request to Flipkart affliate server, Default set to `0` - means unlimited
+  - `maxPage?` {number} Maximum number of pages to scrape per category, Default set to `0` - means unlimited
 
 **Example**
 
@@ -66,6 +67,10 @@ const scraper = new flipkartScraper(
      * This is optional param, default is set to 0 means unlimited
      **/
     maxRequest: 500,
+    /**
+     * Maximum 3 request per category
+     **/
+    maxPage: 3,
   }
 );
 ```
@@ -108,16 +113,29 @@ scraper.on("data", (data) => {
 });
 ```
 
-### events: 'complete'
+### events: 'completed'
 
-Emitted when scraping gets completed.
+Emitted when all products scraped by category.
 
 **Example**
 
 ```javascript
 // 'completed' event handler
-scraper.on("completed", (msg) => {
-  console.log(msg);
+scraper.on("completed", (info) => {
+  console.log(info);
+});
+```
+
+### events: 'finished'
+
+Emitted when scraper finished
+
+**Example**
+
+```javascript
+// 'finished' event handler
+scraper.on("finished", (info) => {
+  console.log(info);
 });
 ```
 
