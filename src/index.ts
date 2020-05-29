@@ -49,7 +49,7 @@ interface ScraperOptions {
 export default class FlipkartScraper extends EventEmitter {
     private _affiliateId: string
     private _affiliateToken: string
-    private _baseUrl: string = 'https://affiliate-api.flipkart.net'
+    private _baseUrl = 'https://affiliate-api.flipkart.net'
     private queue: fastq.queue
     private _maxRequest: number
     private _requestedCount: number = 0
