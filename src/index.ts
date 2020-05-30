@@ -14,7 +14,7 @@ interface ResponseObject {
      */
     statusCode: number
     /**
-     * HTTP Status test
+     * HTTP Status text
      */
     statusText: string
     /**
