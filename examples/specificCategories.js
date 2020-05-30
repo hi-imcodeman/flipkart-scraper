@@ -13,9 +13,6 @@ scraper.on('data', (data) => {
         pageNo: data.pageNo
     });
 })
-scraper.on('response', response => {
-    console.log('onResponse:', response.duration)
-})
 scraper.on('completed', info => {
     console.log('Completed:', info)
 })
@@ -24,5 +21,6 @@ scraper.on('finished', info => {
 })
 scraper.on('error', error => {
     console.error(error);
+
 })
-scraper.start().catch(err => {})
+scraper.start(['mobiles', 'televisions']).catch(err => {})

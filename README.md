@@ -4,6 +4,8 @@ This package will help us to scrape all Flipkart products through Flipkart affil
 
 Please refer [API Documentation](https://hi-imcodeman.github.io/flipkart-scraper) here.
 
+See the [Examples](https://github.com/hi-imcodeman/flipkart-scraper/tree/master/examples) here
+
 ## Installation
 
 Install using 'npm'

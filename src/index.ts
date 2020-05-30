@@ -4,14 +4,30 @@ import fastq from 'fastq'
 import eachDeep from 'deepdash/eachDeep'
 import { sleep } from './util'
 
-/**
- * @internal
- */
 interface ResponseObject {
+    /**
+     * Requested URL
+     */
     url: string
+    /**
+     * HTTP Status Code
+     */
     statusCode: number
+    /**
+     * HTTP Status test
+     */
     statusText: string
+    /**
+     * Response Time in milliseconds(ms)
+     */
+    duration: number
+    /**
+     * Response Headers from Flipkart server
+     */
     headers: any
+    /**
+     * Response content
+     */
     data: any
 }
 /**
@@ -201,14 +217,16 @@ export default class FlipkartScraper extends EventEmitter {
      */
     private async _getData(url: string): Promise<ResponseObject> {
         try {
+            const startTs = new Date().getTime()
             const response = await axios.get(url, {
                 headers: {
                     'Fk-Affiliate-Id': this._affiliateId,
                     'Fk-Affiliate-Token': this._affiliateToken,
                 }
             })
+            const duration = new Date().getTime() - startTs
             const { status: statusCode, statusText, headers, data } = response
-            const responseInfo: ResponseObject = { url, statusCode, statusText, headers, data }
+            const responseInfo: ResponseObject = { url, statusCode, statusText, duration, headers, data }
             this.emit('response', responseInfo)
             return Promise.resolve(responseInfo)
         } catch (error) {
