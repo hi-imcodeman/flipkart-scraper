@@ -3,7 +3,12 @@ const flipkartScraper = require('../dist/index').default
 
 const scraper = new flipkartScraper(
     process.env.FK_AFFILIATE_ID,
-    process.env.FK_AFFILIATE_TOKEN)
+    process.env.FK_AFFILIATE_TOKEN, {
+        concurrency: 5, // 5 parallel requests
+        maxRequest: 1000, // only 1000 request to Flipkart affiliate server
+        maxPage: 10 // only scarape 10 pages(max) per category
+    }
+)
 
 scraper.on('data', (data) => {
     console.log({

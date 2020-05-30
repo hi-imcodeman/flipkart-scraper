@@ -23,4 +23,4 @@ scraper.on('error', error => {
     console.error(error);
 
 })
-scraper.start().catch(err => {})
+scraper.start(['mobiles', 'televisions']).catch(err => {})
