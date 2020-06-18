@@ -106,5 +106,5 @@ dist
 # MacOS Store file
 .DS_Store
 
-#Local History
+#Local History Plugin
 .history/
