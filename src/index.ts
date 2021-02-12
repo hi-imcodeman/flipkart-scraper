@@ -120,6 +120,9 @@ export default class FlipkartScraper extends EventEmitter {
     private _processedCount = 0
     private _concurrency: number
     private _maxPage: number
+    private _startTime: Date
+    private _totalProductsCount = 0
+
     /**
      * This is constructor of FlipkartScraper
      * @param affiliateId 
@@ -136,11 +139,24 @@ export default class FlipkartScraper extends EventEmitter {
         this.queue = fastq(this._worker.bind(this), this._concurrency)
         this.emit('ready')
     }
+    stats(): any {
+        const totalDuration = new Date().getTime() - this._startTime.getTime()
+        return {
+            concurrency: this._concurrency,
+            queueLength: this.queue.length(),
+            totalProducts: this._totalProductsCount,
+            totalDuration,
+            durationPerMillionProducts: Number(((totalDuration / this._totalProductsCount) * 1000000).toFixed(0)),
+            speed: Number((this._totalProductsCount / (totalDuration / 1000)).toFixed(0)),
+            avgResponseTime: Number((totalDuration / this._processedCount).toFixed(0))
+        }
+    }
     /**
      * 
      * @param categoriesToScrape 
      */
     async start(categoriesToScrape: string[] = []): Promise<string> {
+        this._startTime = new Date()
         const feedUrl = `${this._baseUrl}/affiliate/api/${this._affiliateId}.json`
         try {
             const { data: feedListing } = await this._getData(feedUrl)
@@ -194,8 +210,11 @@ export default class FlipkartScraper extends EventEmitter {
         this._processedCount++
         if (error === null) {
             const { data: apiData, url } = response.httpResponse
-            if (apiData.products.length)
+            if (apiData.products.length) {
+                this._totalProductsCount += apiData.products.length
                 this.emit('data', { url, apiData, category: response.category, pageNo: response.pageNo })
+            }
+
             if (apiData.nextUrl) {
                 if (this._maxPage === 0 || response.pageNo < this._maxPage)
                     this._enqueue({ url: apiData.nextUrl, category: response.category, pageNo: response.pageNo + 1 })
@@ -208,6 +227,8 @@ export default class FlipkartScraper extends EventEmitter {
                 })
             }
         } else {
+            console.error(error);
+
             this.emit('error', error)
         }
     }
