@@ -16,12 +16,9 @@
     "dist"
   ],
   "typedocOptions": {
-    "stripInternal": true,
-    "excludeExternals": true,
-    "excludePrivate": true,
     "includeVersion": true,
-    "inputFiles": ["./src/index.ts"],
-    "mode": "file",
+    "excludePrivate": true,
+    "entryPoints": ["./src/index.ts"],
     "out": "docs"
   }
 }
