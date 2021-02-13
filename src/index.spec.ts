@@ -56,7 +56,8 @@ describe('Flipkart Scraper', () => {
       url: expect.anything(),
       apiData: expect.anything(),
       category: 'televisions',
-      pageNo: 2
+      pageNo: 2,
+      retryCount: 0
     });
     done()
   })

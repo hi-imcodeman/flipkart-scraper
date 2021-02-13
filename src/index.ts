@@ -37,6 +37,7 @@ interface CompletedResponse {
     httpResponse: ResponseObject
     category: string
     pageNo: number
+    retryCount: number
 }
 
 /**
@@ -46,6 +47,7 @@ interface EnqueuePrams {
     url: string
     category: string
     pageNo: number
+    retryCount: number
 }
 
 interface ScraperOptions {
@@ -70,6 +72,7 @@ interface ScrapedData {
     apiData: any,
     category: string
     pageNo: number
+    retryCount: number
 }
 
 /** 
@@ -151,9 +154,9 @@ export default class FlipkartScraper extends EventEmitter {
                     categoryListing[resourceName] = value
                     if (categoriesToScrape.length) {
                         if (categoriesToScrape.includes(resourceName))
-                            this._enqueue({ url: value, pageNo: 1, category: resourceName })
+                            this._enqueue({ url: value, pageNo: 1, category: resourceName, retryCount: 0 })
                     } else {
-                        this._enqueue({ url: value, pageNo: 1, category: resourceName })
+                        this._enqueue({ url: value, pageNo: 1, category: resourceName, retryCount: 0 })
                     }
                 }
             })
@@ -178,10 +181,19 @@ export default class FlipkartScraper extends EventEmitter {
     }
     private async _worker(params: EnqueuePrams, cb: any) {
         try {
-            const { url, category, pageNo } = params
+            const { url, category, pageNo, retryCount } = params
             const httpResponse = await this._getData(url)
-            cb(null, { httpResponse, category, pageNo })
+            cb(null, { httpResponse, category, pageNo, retryCount })
         } catch (error) {
+            const { status, statusText } = error.response || { status: -1, statusText: 'ERROR' }
+            const { code: errCode } = error
+            if (params.retryCount < 10 && (errCode || status >= 500)) {
+                const retryParams: EnqueuePrams = { ...params, retryCount: params.retryCount + 1 }
+                this._enqueue(retryParams)
+                this.emit('retry', { ...retryParams, status, statusText, errCode })
+            } else {
+                this.emit('retryHalted', { ...params, status, statusText, errCode })
+            }
             cb(error, null)
         }
     }
@@ -195,16 +207,16 @@ export default class FlipkartScraper extends EventEmitter {
         if (error === null) {
             const { data: apiData, url } = response.httpResponse
             if (apiData.products.length)
-                this.emit('data', { url, apiData, category: response.category, pageNo: response.pageNo })
+                this.emit('data', { url, apiData, category: response.category, pageNo: response.pageNo, retryCount: response.retryCount })
             if (apiData.nextUrl) {
                 if (this._maxPage === 0 || response.pageNo < this._maxPage)
-                    this._enqueue({ url: apiData.nextUrl, category: response.category, pageNo: response.pageNo + 1 })
+                    this._enqueue({ url: apiData.nextUrl, category: response.category, pageNo: response.pageNo + 1, retryCount: 0 })
             }
             else {
                 this.emit('completed', {
                     category: response.category,
                     noOfPages: response.pageNo,
-                    totalProducts: apiData.products.length + ((response.pageNo - 1) * 500)
+                    totalProducts: apiData.products.length + ((response.pageNo - 1) * 500),
                 })
             }
         } else {
