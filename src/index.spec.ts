@@ -1,9 +1,9 @@
-import flipkartScraper from './index'
+import { FlipkartScraper } from './index'
 jest.setTimeout(999999)
 
 describe('Flipkart Scraper', () => {
   it('should get response from the flipkart affiliate API', async (done) => {
-    const scraper = new flipkartScraper(
+    const scraper = new FlipkartScraper(
       "hi-imcodeman",
       "f44755229c5f11eabb370242ac130002"
     );
@@ -21,7 +21,7 @@ describe('Flipkart Scraper', () => {
   })
 
   it('should scrape only number of endpoints based on maxRequest', async (done) => {
-    const scraper = new flipkartScraper(
+    const scraper = new FlipkartScraper(
       "hi-imcodeman",
       "f44755229c5f11eabb370242ac130002",
       { maxRequest: 1 }
@@ -40,7 +40,7 @@ describe('Flipkart Scraper', () => {
   })
 
   it('should get response from the flipkart affiliate API only for specific category with maxPage', async (done) => {
-    const scraper = new flipkartScraper(
+    const scraper = new FlipkartScraper(
       "hi-imcodeman",
       "f44755229c5f11eabb370242ac130002",
       { maxPage: 2 }
@@ -66,7 +66,7 @@ describe('Flipkart Scraper', () => {
   })
 
   it('should throw error for page 3 of television category', async (done) => {
-    const scraper = new flipkartScraper(
+    const scraper = new FlipkartScraper(
       "hi-imcodeman",
       "f44755229c5f11eabb370242ac130002"
     );
@@ -89,7 +89,7 @@ describe('Flipkart Scraper', () => {
     done()
   })
   it('should retries on 500 internal server error', async (done) => {
-    const scraper = new flipkartScraper(
+    const scraper = new FlipkartScraper(
       "hi-imcodeman",
       "f44755229c5f11eabb370242ac130002"
     );
@@ -112,7 +112,7 @@ describe('Flipkart Scraper', () => {
     done()
   })
   it('should not retry on 410 HTTP status', async (done) => {
-    const scraper = new flipkartScraper(
+    const scraper = new FlipkartScraper(
       "hi-imcodeman",
       "f44755229c5f11eabb370242ac130002"
     );
@@ -135,7 +135,7 @@ describe('Flipkart Scraper', () => {
     done()
   })
   it('should throw 401 HTTP error on invalid affiliate id/token', async (done) => {
-    const scraper = new flipkartScraper(
+    const scraper = new FlipkartScraper(
       "invalidId",
       "someToken"
     );

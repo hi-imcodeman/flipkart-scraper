@@ -50,7 +50,7 @@ interface EnqueuePrams {
     retryCount: number
 }
 
-interface ScraperOptions {
+export interface ScraperOptions {
     /**
      * Maximum request to Flipkart affliate server 
      */
@@ -80,40 +80,54 @@ interface ScrapedData {
  * @memberof FlipkartScraper
  * @event
  */
-declare function response(response: ResponseObject): void;
+export declare function response(response: ResponseObject): void;
 
 /** 
  * Emitted when products returned from Flipkart affiliate API.
  * @memberof FlipkartScraper
  * @event
  */
-declare function data(data: ScrapedData): void;
+export declare function data(data: ScrapedData): void;
 
 /** 
  * Emitted if any errors occured.
  * @memberof FlipkartScraper
  * @event
  */
-declare function error(error: any): void;
+export declare function error(error: any): void;
 
 /** 
  * Emitted when all products scraped by category.
  * @memberof FlipkartScraper
  * @event
  */
-declare function completed(info: any): void;
+export declare function completed(info: any): void;
 
 /** 
  * Emitted when scraper finished
  * @memberof FlipkartScraper
  * @event
  */
-declare function finished(message: string): void;
+export declare function finished(message: string): void;
+
+/** 
+ * Emitted when scraper finished
+ * @memberof FlipkartScraper
+ * @event
+ */
+export declare function retry(info: any): void;
+
+/** 
+ * Emitted when scraper finished
+ * @memberof FlipkartScraper
+ * @event
+ */
+export declare function retryHalted(info: any): void;
 
 /**
  * This the main class for Flipkart scraper
  */
-export default class FlipkartScraper extends EventEmitter {
+export class FlipkartScraper extends EventEmitter {
     private _affiliateId: string
     private _affiliateToken: string
     private _baseUrl = 'https://affiliate-api.flipkart.net'
