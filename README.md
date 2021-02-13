@@ -1,5 +1,5 @@
-
 [![NPM](https://nodei.co/npm/flipkart-scraper.png)](https://nodei.co/npm/flipkart-scraper/)
+
 # Flipkart Scraper ![](https://github.com/hi-imcodeman/flipkart-scraper/workflows/CI/badge.svg)
 
 This package will help us to scrape all Flipkart products through Flipkart affiliate API.
@@ -25,9 +25,9 @@ yarn add flipkart-scraper
 ## Usage
 
 ```javascript
-import flipkartScraper from "flipkart-scraper";
+import { FlipkartScraper } from "flipkart-scraper";
 
-const scraper = new flipkartScraper(
+const scraper = new FlipkartScraper(
   "<Affiliate-Id-Here>",
   "<Affiliate-Token-Here>"
 );
@@ -59,7 +59,7 @@ This will create instance of the `FlipkartScraper` class with required authentic
 **Example**
 
 ```javascript
-const scraper = new flipkartScraper(
+const scraper = new FlipkartScraper(
   "<Affiliate-Id-Here>",
   "<Affiliate-Token-Here>",
   {
