@@ -18,7 +18,7 @@ scraper.on('data', (data) => {
 scraper.on('response', response => {
     console.log('onResponse:', response.duration)
 })
-scraper.on('completed', info => {
+scraper.on('categoryCompleted', info => {
     console.log('Completed:', info)
 })
 scraper.on('finished', info => {

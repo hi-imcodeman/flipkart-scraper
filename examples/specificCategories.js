@@ -15,7 +15,7 @@ scraper.on('data', (data) => {
         pageNo: data.pageNo
     });
 })
-scraper.on('completed', info => {
+scraper.on('categoryCompleted', info => {
     console.log('Completed:', info)
 })
 scraper.on('finished', info => {

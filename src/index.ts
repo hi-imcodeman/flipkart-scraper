@@ -103,7 +103,7 @@ export interface CompletedCategoryInfo {
  * @memberof FlipkartScraper
  * @event
  */
-export declare function completed(completedCategoryInfo: CompletedCategoryInfo): void;
+export declare function categoryCompleted(completedCategoryInfo: CompletedCategoryInfo): void;
 export interface FinishedInfo {
     message: string
     totalRequest: number
@@ -250,7 +250,7 @@ export class FlipkartScraper extends EventEmitter {
                     noOfPages: completedResponse.pageNo,
                     totalProducts: apiData.products.length + ((completedResponse.pageNo - 1) * 500),
                 }
-                this.emit('completed', completedInfo)
+                this.emit('categoryCompleted', completedInfo)
             }
         } else {
             this.emit('error', errorObj)

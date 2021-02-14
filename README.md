@@ -119,16 +119,16 @@ scraper.on("data", (data) => {
 });
 ```
 
-### events: 'completed'
+### events: 'categoryCompleted'
 
 Emitted when all products scraped by category.
 
 **Example**
 
 ```javascript
-// 'completed' event handler
-scraper.on("completed", (info) => {
-  console.log(info);
+// 'categoryCompleted' event handler
+scraper.on("categoryCompleted", (completedCategoryInfo) => {
+  console.log(completedCategoryInfo);
 });
 ```
 
