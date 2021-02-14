@@ -157,3 +157,29 @@ scraper.on("error", (error) => {
   console.error(error);
 });
 ```
+
+### events: 'retry'
+
+Emitted if any retry occured.
+
+**Example**
+
+```javascript
+// Retry handler
+scraper.on("retry", (retryInfo) => {
+  console.log(retryInfo);
+});
+```
+
+### events: 'retryHalted'
+
+Emitted if any retries failed 10 times.
+
+**Example**
+
+```javascript
+// Triggerd when retry failed 10 times
+scraper.on("retryHalted", (retryHaltInfo) => {
+  console.error(retryHaltInfo);
+});
+```

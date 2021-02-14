@@ -131,7 +131,7 @@ export declare function retry(retryInfo: RetryInfo): void;
  * @memberof FlipkartScraper
  * @event
  */
-export declare function retryHalted(retryInfo: RetryInfo): void;
+export declare function retryHalted(retryHaltInfo: RetryInfo): void;
 
 /**
  * This the main class for Flipkart scraper
