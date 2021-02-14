@@ -39,8 +39,6 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -62,12 +60,269 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Modules</h3>
+							<h3>Classes</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-module"><a href="modules/index.html" class="tsd-kind-icon">index</a></li>
+								<li class="tsd-kind-class"><a href="classes/flipkartscraper.html" class="tsd-kind-icon">Flipkart<wbr>Scraper</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface"><a href="interfaces/completedcategoryinfo.html" class="tsd-kind-icon">Completed<wbr>Category<wbr>Info</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/finishedinfo.html" class="tsd-kind-icon">Finished<wbr>Info</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/responseobject.html" class="tsd-kind-icon">Response<wbr>Object</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/retryinfo.html" class="tsd-kind-icon">Retry<wbr>Info</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/scrapeddata.html" class="tsd-kind-icon">Scraped<wbr>Data</a></li>
+								<li class="tsd-kind-interface"><a href="interfaces/scraperoptions.html" class="tsd-kind-icon">Scraper<wbr>Options</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Events</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-event"><a href="modules.html#categorycompleted" class="tsd-kind-icon">category<wbr>Completed</a></li>
+								<li class="tsd-kind-event"><a href="modules.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-event"><a href="modules.html#error" class="tsd-kind-icon">error</a></li>
+								<li class="tsd-kind-event"><a href="modules.html#finished" class="tsd-kind-icon">finished</a></li>
+								<li class="tsd-kind-event"><a href="modules.html#response" class="tsd-kind-icon">response</a></li>
+								<li class="tsd-kind-event"><a href="modules.html#retry" class="tsd-kind-icon">retry</a></li>
+								<li class="tsd-kind-event"><a href="modules.html#retryhalted" class="tsd-kind-icon">retry<wbr>Halted</a></li>
 							</ul>
 						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Events</h2>
+				<section class="tsd-panel tsd-member tsd-kind-event">
+					<a name="categorycompleted" class="tsd-anchor"></a>
+					<h3>category<wbr>Completed</h3>
+					<ul class="tsd-signatures tsd-kind-event">
+						<li class="tsd-signature tsd-kind-icon">category<wbr>Completed<span class="tsd-signature-symbol">(</span>completedCategoryInfo<span class="tsd-signature-symbol">: </span><a href="interfaces/completedcategoryinfo.html" class="tsd-signature-type" data-tsd-kind="Interface">CompletedCategoryInfo</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/c1f3ac2/src/index.ts#L106">index.ts:106</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Emitted when all products scraped by category.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>FlipkartScraper</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>completedCategoryInfo: <a href="interfaces/completedcategoryinfo.html" class="tsd-signature-type" data-tsd-kind="Interface">CompletedCategoryInfo</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-event">
+					<a name="data" class="tsd-anchor"></a>
+					<h3>data</h3>
+					<ul class="tsd-signatures tsd-kind-event">
+						<li class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">(</span>scrapedData<span class="tsd-signature-symbol">: </span><a href="interfaces/scrapeddata.html" class="tsd-signature-type" data-tsd-kind="Interface">ScrapedData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/c1f3ac2/src/index.ts#L88">index.ts:88</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Emitted when products returned from Flipkart affiliate API.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>FlipkartScraper</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>scrapedData: <a href="interfaces/scrapeddata.html" class="tsd-signature-type" data-tsd-kind="Interface">ScrapedData</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-event">
+					<a name="error" class="tsd-anchor"></a>
+					<h3>error</h3>
+					<ul class="tsd-signatures tsd-kind-event">
+						<li class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">(</span>errorObj<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AxiosError</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/c1f3ac2/src/index.ts#L95">index.ts:95</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Emitted if any errors occured.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>FlipkartScraper</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>errorObj: <span class="tsd-signature-type">AxiosError</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-event">
+					<a name="finished" class="tsd-anchor"></a>
+					<h3>finished</h3>
+					<ul class="tsd-signatures tsd-kind-event">
+						<li class="tsd-signature tsd-kind-icon">finished<span class="tsd-signature-symbol">(</span>finishedInfo<span class="tsd-signature-symbol">: </span><a href="interfaces/finishedinfo.html" class="tsd-signature-type" data-tsd-kind="Interface">FinishedInfo</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/c1f3ac2/src/index.ts#L116">index.ts:116</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Emitted when scraper finished</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>FlipkartScraper</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>finishedInfo: <a href="interfaces/finishedinfo.html" class="tsd-signature-type" data-tsd-kind="Interface">FinishedInfo</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-event">
+					<a name="response" class="tsd-anchor"></a>
+					<h3>response</h3>
+					<ul class="tsd-signatures tsd-kind-event">
+						<li class="tsd-signature tsd-kind-icon">response<span class="tsd-signature-symbol">(</span>httpResponse<span class="tsd-signature-symbol">: </span><a href="interfaces/responseobject.html" class="tsd-signature-type" data-tsd-kind="Interface">ResponseObject</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/c1f3ac2/src/index.ts#L81">index.ts:81</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Emitted when successful HTTP response from the Flipkart Affiliate server.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>FlipkartScraper</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>httpResponse: <a href="interfaces/responseobject.html" class="tsd-signature-type" data-tsd-kind="Interface">ResponseObject</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-event">
+					<a name="retry" class="tsd-anchor"></a>
+					<h3>retry</h3>
+					<ul class="tsd-signatures tsd-kind-event">
+						<li class="tsd-signature tsd-kind-icon">retry<span class="tsd-signature-symbol">(</span>retryInfo<span class="tsd-signature-symbol">: </span><a href="interfaces/retryinfo.html" class="tsd-signature-type" data-tsd-kind="Interface">RetryInfo</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/c1f3ac2/src/index.ts#L127">index.ts:127</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Emitted when retry occurred</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>FlipkartScraper</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>retryInfo: <a href="interfaces/retryinfo.html" class="tsd-signature-type" data-tsd-kind="Interface">RetryInfo</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-event">
+					<a name="retryhalted" class="tsd-anchor"></a>
+					<h3>retry<wbr>Halted</h3>
+					<ul class="tsd-signatures tsd-kind-event">
+						<li class="tsd-signature tsd-kind-icon">retry<wbr>Halted<span class="tsd-signature-symbol">(</span>retryHaltInfo<span class="tsd-signature-symbol">: </span><a href="interfaces/retryinfo.html" class="tsd-signature-type" data-tsd-kind="Interface">RetryInfo</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/c1f3ac2/src/index.ts#L134">index.ts:134</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Emitted when retry failed 10 times</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>FlipkartScraper</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>retryHaltInfo: <a href="interfaces/retryinfo.html" class="tsd-signature-type" data-tsd-kind="Interface">RetryInfo</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -75,15 +330,54 @@
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="current ">
-						<a href="modules.html">Modules</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/index.html">index</a>
+						<a href="modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/flipkartscraper.html" class="tsd-kind-icon">Flipkart<wbr>Scraper</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/completedcategoryinfo.html" class="tsd-kind-icon">Completed<wbr>Category<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/finishedinfo.html" class="tsd-kind-icon">Finished<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/responseobject.html" class="tsd-kind-icon">Response<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/retryinfo.html" class="tsd-kind-icon">Retry<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/scrapeddata.html" class="tsd-kind-icon">Scraped<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/scraperoptions.html" class="tsd-kind-icon">Scraper<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="modules.html#categorycompleted" class="tsd-kind-icon">category<wbr>Completed</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="modules.html#data" class="tsd-kind-icon">data</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="modules.html#error" class="tsd-kind-icon">error</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="modules.html#finished" class="tsd-kind-icon">finished</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="modules.html#response" class="tsd-kind-icon">response</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="modules.html#retry" class="tsd-kind-icon">retry</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="modules.html#retryhalted" class="tsd-kind-icon">retry<wbr>Halted</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -94,10 +388,11 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 		</div>
 	</div>

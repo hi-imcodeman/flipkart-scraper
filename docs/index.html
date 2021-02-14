@@ -39,8 +39,6 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -163,14 +161,14 @@
 <span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">data</span><span style="color: #000000">.</span><span style="color: #001080">apiData</span><span style="color: #000000">.</span><span style="color: #001080">products</span><span style="color: #000000">);</span>
 <span style="color: #000000">});</span>
 </code></pre>
-				<a href="#events-39completed39" id="events-39completed39" style="color: inherit; text-decoration: none;">
-					<h3>events: &#39;completed&#39;</h3>
+				<a href="#events-39categorycompleted39" id="events-39categorycompleted39" style="color: inherit; text-decoration: none;">
+					<h3>events: &#39;categoryCompleted&#39;</h3>
 				</a>
 				<p>Emitted when all products scraped by category.</p>
 				<p><strong>Example</strong></p>
-				<pre><code class="language-javascript"><span style="color: #008000">// &#039;completed&#039; event handler</span>
-<span style="color: #001080">scraper</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;completed&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">info</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">info</span><span style="color: #000000">);</span>
+				<pre><code class="language-javascript"><span style="color: #008000">// &#039;categoryCompleted&#039; event handler</span>
+<span style="color: #001080">scraper</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;categoryCompleted&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">completedCategoryInfo</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">completedCategoryInfo</span><span style="color: #000000">);</span>
 <span style="color: #000000">});</span>
 </code></pre>
 				<a href="#events-39finished39" id="events-39finished39" style="color: inherit; text-decoration: none;">
@@ -193,21 +191,80 @@
 <span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #001080">error</span><span style="color: #000000">);</span>
 <span style="color: #000000">});</span>
 </code></pre>
+				<a href="#events-39retry39" id="events-39retry39" style="color: inherit; text-decoration: none;">
+					<h3>events: &#39;retry&#39;</h3>
+				</a>
+				<p>Emitted if any retry occured.</p>
+				<p><strong>Example</strong></p>
+				<pre><code class="language-javascript"><span style="color: #008000">// Retry handler</span>
+<span style="color: #001080">scraper</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;retry&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">retryInfo</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">retryInfo</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+</code></pre>
+				<a href="#events-39retryhalted39" id="events-39retryhalted39" style="color: inherit; text-decoration: none;">
+					<h3>events: &#39;retryHalted&#39;</h3>
+				</a>
+				<p>Emitted if any retries failed 10 times.</p>
+				<p><strong>Example</strong></p>
+				<pre><code class="language-javascript"><span style="color: #008000">// Triggerd when retry failed 10 times</span>
+<span style="color: #001080">scraper</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;retryHalted&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">retryHaltInfo</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #001080">retryHaltInfo</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class=" ">
-						<a href="modules.html">Modules</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/index.html">index</a>
+						<a href="modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/flipkartscraper.html" class="tsd-kind-icon">Flipkart<wbr>Scraper</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/completedcategoryinfo.html" class="tsd-kind-icon">Completed<wbr>Category<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/finishedinfo.html" class="tsd-kind-icon">Finished<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/responseobject.html" class="tsd-kind-icon">Response<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/retryinfo.html" class="tsd-kind-icon">Retry<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/scrapeddata.html" class="tsd-kind-icon">Scraped<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/scraperoptions.html" class="tsd-kind-icon">Scraper<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="modules.html#categorycompleted" class="tsd-kind-icon">category<wbr>Completed</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="modules.html#data" class="tsd-kind-icon">data</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="modules.html#error" class="tsd-kind-icon">error</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="modules.html#finished" class="tsd-kind-icon">finished</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="modules.html#response" class="tsd-kind-icon">response</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="modules.html#retry" class="tsd-kind-icon">retry</a>
+					</li>
+					<li class=" tsd-kind-event">
+						<a href="modules.html#retryhalted" class="tsd-kind-icon">retry<wbr>Halted</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
@@ -218,10 +275,11 @@
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
 			</ul>
 		</div>
 	</div>
