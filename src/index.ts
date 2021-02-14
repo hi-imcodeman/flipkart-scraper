@@ -104,14 +104,17 @@ export interface CompletedCategoryInfo {
  * @event
  */
 export declare function completed(completedCategoryInfo: CompletedCategoryInfo): void;
-
+export interface FinishedInfo {
+    message: string
+    totalRequest: number
+}
 /** 
  * Emitted when scraper finished
  * @memberof FlipkartScraper
  * @event
  */
-export declare function finished(message: string): void;
-export interface RetryData extends EnqueuePrams {
+export declare function finished(finishedInfo: FinishedInfo): void;
+export interface RetryInfo extends EnqueuePrams {
     status: number
     statusText: string
     errorCode: undefined | string
@@ -121,14 +124,14 @@ export interface RetryData extends EnqueuePrams {
  * @memberof FlipkartScraper
  * @event
  */
-export declare function retry(info: any): void;
+export declare function retry(retryInfo: RetryInfo): void;
 
 /** 
  * Emitted when retry failed 10 times
  * @memberof FlipkartScraper
  * @event
  */
-export declare function retryHalted(info: any): void;
+export declare function retryHalted(retryInfo: RetryInfo): void;
 
 /**
  * This the main class for Flipkart scraper
@@ -137,7 +140,7 @@ export class FlipkartScraper extends EventEmitter {
     private _affiliateId: string
     private _affiliateToken: string
     private _baseUrl = 'https://affiliate-api.flipkart.net'
-    private queue: fastq.queue
+    private _queue: fastq.queue
     private _maxRequest: number
     private _requestedCount = 0
     private _processedCount = 0
@@ -156,7 +159,7 @@ export class FlipkartScraper extends EventEmitter {
         this._maxRequest = options.maxRequest || 0
         this._concurrency = options.concurrency || 2
         this._maxPage = options.maxPage || 0
-        this.queue = fastq(this._worker.bind(this), this._concurrency)
+        this._queue = fastq(this._worker.bind(this), this._concurrency)
         this.emit('ready')
     }
     /**
@@ -180,10 +183,11 @@ export class FlipkartScraper extends EventEmitter {
                     }
                 }
             })
-            while (!this.queue.idle()) {
+            while (!this._queue.idle()) {
                 await sleep(1000)
             }
-            this.emit('finished', { message: 'Scraping Completed', totalRequest: this._processedCount })
+            const finishedInfo: FinishedInfo = { message: 'Scraping Completed', totalRequest: this._processedCount }
+            this.emit('finished', finishedInfo)
             return Promise.resolve('Scraping Completed.')
         } catch (errorObj) {
             this.emit('error', errorObj)
@@ -197,7 +201,7 @@ export class FlipkartScraper extends EventEmitter {
     private async _enqueue(params: EnqueuePrams) {
         this._requestedCount++
         if (this._maxRequest === 0 || this._requestedCount <= this._maxRequest)
-            this.queue.push(params, this._onComplete.bind(this))
+            this._queue.push(params, this._onComplete.bind(this))
     }
     private async _worker(params: EnqueuePrams, cb: any) {
         try {
@@ -210,10 +214,10 @@ export class FlipkartScraper extends EventEmitter {
             if (params.retryCount < 10 && (errorCode || status >= 500)) {
                 const retryParams: EnqueuePrams = { ...params, retryCount: params.retryCount + 1 }
                 this._enqueue(retryParams)
-                const retryData: RetryData = { ...retryParams, status, statusText, errorCode }
+                const retryData: RetryInfo = { ...retryParams, status, statusText, errorCode }
                 this.emit('retry', retryData)
             } else {
-                const retryData: RetryData = { ...params, status, statusText, errorCode }
+                const retryData: RetryInfo = { ...params, status, statusText, errorCode }
                 this.emit('retryHalted', retryData)
             }
             cb(errorObj, null)
