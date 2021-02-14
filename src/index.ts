@@ -1,10 +1,10 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { EventEmitter } from 'events'
 import fastq from 'fastq'
 import eachDeep from 'deepdash/eachDeep'
 import { sleep } from './util'
 
-interface ResponseObject {
+export interface ResponseObject {
     /**
      * Requested URL
      */
@@ -12,7 +12,7 @@ interface ResponseObject {
     /**
      * HTTP Status Code
      */
-    statusCode: number
+    status: number
     /**
      * HTTP Status text
      */
@@ -65,11 +65,9 @@ export interface ScraperOptions {
     maxPage?: number
 }
 
-// { url, apiData, category: response.category, pageNo: response.pageNo }
-
-interface ScrapedData {
+export interface ScrapedData {
     url: string
-    apiData: any,
+    apiData: any
     category: string
     pageNo: number
     retryCount: number
@@ -80,28 +78,32 @@ interface ScrapedData {
  * @memberof FlipkartScraper
  * @event
  */
-export declare function response(response: ResponseObject): void;
+export declare function response(httpResponse: ResponseObject): void;
 
 /** 
  * Emitted when products returned from Flipkart affiliate API.
  * @memberof FlipkartScraper
  * @event
  */
-export declare function data(data: ScrapedData): void;
+export declare function data(scrapedData: ScrapedData): void;
 
 /** 
  * Emitted if any errors occured.
  * @memberof FlipkartScraper
  * @event
  */
-export declare function error(error: any): void;
-
+export declare function error(errorObj: AxiosError): void;
+export interface CompletedCategoryInfo {
+    category: string
+    noOfPages: number
+    totalProducts: number
+}
 /** 
  * Emitted when all products scraped by category.
  * @memberof FlipkartScraper
  * @event
  */
-export declare function completed(info: any): void;
+export declare function completed(completedCategoryInfo: CompletedCategoryInfo): void;
 
 /** 
  * Emitted when scraper finished
@@ -109,16 +111,20 @@ export declare function completed(info: any): void;
  * @event
  */
 export declare function finished(message: string): void;
-
+export interface RetryData extends EnqueuePrams {
+    status: number
+    statusText: string
+    errorCode: undefined | string
+}
 /** 
- * Emitted when scraper finished
+ * Emitted when retry occurred
  * @memberof FlipkartScraper
  * @event
  */
 export declare function retry(info: any): void;
 
 /** 
- * Emitted when scraper finished
+ * Emitted when retry failed 10 times
  * @memberof FlipkartScraper
  * @event
  */
@@ -178,10 +184,10 @@ export class FlipkartScraper extends EventEmitter {
                 await sleep(1000)
             }
             this.emit('finished', { message: 'Scraping Completed', totalRequest: this._processedCount })
-            return Promise.resolve('finished')
-        } catch (error) {
-            this.emit('error', error)
-            return Promise.reject(error)
+            return Promise.resolve('Scraping Completed.')
+        } catch (errorObj) {
+            this.emit('error', errorObj)
+            return Promise.reject(errorObj)
         }
     }
     /**
@@ -198,43 +204,52 @@ export class FlipkartScraper extends EventEmitter {
             const { url, category, pageNo, retryCount } = params
             const httpResponse = await this._getData(url)
             cb(null, { httpResponse, category, pageNo, retryCount })
-        } catch (error) {
-            const { status, statusText } = error.response || { status: -1, statusText: 'ERROR' }
-            const { code: errCode } = error
-            if (params.retryCount < 10 && (errCode || status >= 500)) {
+        } catch (errorObj) {
+            const { status, statusText } = errorObj.response || { status: -1, statusText: 'ERROR' }
+            const { code: errorCode } = errorObj
+            if (params.retryCount < 10 && (errorCode || status >= 500)) {
                 const retryParams: EnqueuePrams = { ...params, retryCount: params.retryCount + 1 }
                 this._enqueue(retryParams)
-                this.emit('retry', { ...retryParams, status, statusText, errCode })
+                const retryData: RetryData = { ...retryParams, status, statusText, errorCode }
+                this.emit('retry', retryData)
             } else {
-                this.emit('retryHalted', { ...params, status, statusText, errCode })
+                const retryData: RetryData = { ...params, status, statusText, errorCode }
+                this.emit('retryHalted', retryData)
             }
-            cb(error, null)
+            cb(errorObj, null)
         }
     }
     /**
      * 
-     * @param error 
-     * @param response 
+     * @param errorObj
+     * @param completedResponse 
      */
-    private _onComplete(error: any, response: CompletedResponse) {
+    private _onComplete(errorObj: any, completedResponse: CompletedResponse) {
         this._processedCount++
-        if (error === null) {
-            const { data: apiData, url } = response.httpResponse
+        if (errorObj === null) {
+            const { data: apiData, url } = completedResponse.httpResponse
             if (apiData.products.length)
-                this.emit('data', { url, apiData, category: response.category, pageNo: response.pageNo, retryCount: response.retryCount })
+                this.emit('data', {
+                    url,
+                    apiData,
+                    category: completedResponse.category,
+                    pageNo: completedResponse.pageNo,
+                    retryCount: completedResponse.retryCount
+                })
             if (apiData.nextUrl) {
-                if (this._maxPage === 0 || response.pageNo < this._maxPage)
-                    this._enqueue({ url: apiData.nextUrl, category: response.category, pageNo: response.pageNo + 1, retryCount: 0 })
+                if (this._maxPage === 0 || completedResponse.pageNo < this._maxPage)
+                    this._enqueue({ url: apiData.nextUrl, category: completedResponse.category, pageNo: completedResponse.pageNo + 1, retryCount: 0 })
             }
             else {
-                this.emit('completed', {
-                    category: response.category,
-                    noOfPages: response.pageNo,
-                    totalProducts: apiData.products.length + ((response.pageNo - 1) * 500),
-                })
+                const completedInfo: CompletedCategoryInfo = {
+                    category: completedResponse.category,
+                    noOfPages: completedResponse.pageNo,
+                    totalProducts: apiData.products.length + ((completedResponse.pageNo - 1) * 500),
+                }
+                this.emit('completed', completedInfo)
             }
         } else {
-            this.emit('error', error)
+            this.emit('error', errorObj)
         }
     }
     /**
@@ -244,19 +259,19 @@ export class FlipkartScraper extends EventEmitter {
     private async _getData(url: string): Promise<ResponseObject> {
         try {
             const startTs = new Date().getTime()
-            const response = await axios.get(url, {
+            const responseObj = await axios.get(url, {
                 headers: {
                     'Fk-Affiliate-Id': this._affiliateId,
                     'Fk-Affiliate-Token': this._affiliateToken,
                 }
             })
             const duration = new Date().getTime() - startTs
-            const { status: statusCode, statusText, headers, data } = response
-            const responseInfo: ResponseObject = { url, statusCode, statusText, duration, headers, data }
+            const { status, statusText, headers, data: apiData } = responseObj
+            const responseInfo: ResponseObject = { url, status, statusText, duration, headers, data: apiData }
             this.emit('response', responseInfo)
             return Promise.resolve(responseInfo)
-        } catch (error) {
-            return Promise.reject(error)
+        } catch (errorObj) {
+            return Promise.reject(errorObj)
         }
     }
 }
