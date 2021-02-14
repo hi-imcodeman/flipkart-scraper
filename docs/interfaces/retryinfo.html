@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ResponseObject | flipkart-scraper - v1.1.0</title>
+	<title>RetryInfo | flipkart-scraper - v1.1.0</title>
 	<meta name="description" content="Documentation for flipkart-scraper - v1.1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -53,10 +53,10 @@
 					<a href="../modules.html">flipkart-scraper - v1.1.0</a>
 				</li>
 				<li>
-					<a href="responseobject.html">ResponseObject</a>
+					<a href="retryinfo.html">RetryInfo</a>
 				</li>
 			</ul>
-			<h1>Interface ResponseObject</h1>
+			<h1>Interface RetryInfo</h1>
 		</div>
 	</div>
 </header>
@@ -67,7 +67,12 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ResponseObject</span>
+						<span class="tsd-signature-type">EnqueuePrams</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">RetryInfo</span>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</section>
@@ -78,12 +83,13 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="responseobject.html#data" class="tsd-kind-icon">data</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="responseobject.html#duration" class="tsd-kind-icon">duration</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="responseobject.html#headers" class="tsd-kind-icon">headers</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="responseobject.html#status" class="tsd-kind-icon">status</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="responseobject.html#statustext" class="tsd-kind-icon">status<wbr>Text</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="responseobject.html#url" class="tsd-kind-icon">url</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="retryinfo.html#category" class="tsd-kind-icon">category</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="retryinfo.html#errorcode" class="tsd-kind-icon">error<wbr>Code</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="retryinfo.html#pageno" class="tsd-kind-icon">page<wbr>No</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="retryinfo.html#retrycount" class="tsd-kind-icon">retry<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="retryinfo.html#status" class="tsd-kind-icon">status</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="retryinfo.html#statustext" class="tsd-kind-icon">status<wbr>Text</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="retryinfo.html#url" class="tsd-kind-icon">url</a></li>
 							</ul>
 						</section>
 					</div>
@@ -92,49 +98,44 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="data" class="tsd-anchor"></a>
-					<h3>data</h3>
-					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<a name="category" class="tsd-anchor"></a>
+					<h3>category</h3>
+					<div class="tsd-signature tsd-kind-icon">category<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/edc60d4/src/index.ts#L31">index.ts:31</a></li>
+							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/edc60d4/src/index.ts#L48">index.ts:48</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Response content</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="duration" class="tsd-anchor"></a>
-					<h3>duration</h3>
-					<div class="tsd-signature tsd-kind-icon">duration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="errorcode" class="tsd-anchor"></a>
+					<h3>error<wbr>Code</h3>
+					<div class="tsd-signature tsd-kind-icon">error<wbr>Code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/edc60d4/src/index.ts#L23">index.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/edc60d4/src/index.ts#L120">index.ts:120</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Response Time in milliseconds(ms)</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="headers" class="tsd-anchor"></a>
-					<h3>headers</h3>
-					<div class="tsd-signature tsd-kind-icon">headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<a name="pageno" class="tsd-anchor"></a>
+					<h3>page<wbr>No</h3>
+					<div class="tsd-signature tsd-kind-icon">page<wbr>No<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/edc60d4/src/index.ts#L27">index.ts:27</a></li>
+							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/edc60d4/src/index.ts#L49">index.ts:49</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Response Headers from Flipkart server</p>
-						</div>
-					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="retrycount" class="tsd-anchor"></a>
+					<h3>retry<wbr>Count</h3>
+					<div class="tsd-signature tsd-kind-icon">retry<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/edc60d4/src/index.ts#L50">index.ts:50</a></li>
+						</ul>
+					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="status" class="tsd-anchor"></a>
@@ -142,14 +143,9 @@
 					<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/edc60d4/src/index.ts#L15">index.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/edc60d4/src/index.ts#L118">index.ts:118</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>HTTP Status Code</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="statustext" class="tsd-anchor"></a>
@@ -157,14 +153,9 @@
 					<div class="tsd-signature tsd-kind-icon">status<wbr>Text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/edc60d4/src/index.ts#L19">index.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/edc60d4/src/index.ts#L119">index.ts:119</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>HTTP Status text</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="url" class="tsd-anchor"></a>
@@ -172,14 +163,9 @@
 					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/edc60d4/src/index.ts#L11">index.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/edc60d4/src/index.ts#L47">index.ts:47</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Requested URL</p>
-						</div>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -202,36 +188,39 @@
 					<li class=" tsd-kind-interface">
 						<a href="finishedinfo.html" class="tsd-kind-icon">Finished<wbr>Info</a>
 					</li>
+					<li class=" tsd-kind-interface">
+						<a href="responseobject.html" class="tsd-kind-icon">Response<wbr>Object</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="responseobject.html" class="tsd-kind-icon">Response<wbr>Object</a>
+						<a href="retryinfo.html" class="tsd-kind-icon">Retry<wbr>Info</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="responseobject.html#data" class="tsd-kind-icon">data</a>
+								<a href="retryinfo.html#category" class="tsd-kind-icon">category</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="responseobject.html#duration" class="tsd-kind-icon">duration</a>
+								<a href="retryinfo.html#errorcode" class="tsd-kind-icon">error<wbr>Code</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="responseobject.html#headers" class="tsd-kind-icon">headers</a>
+								<a href="retryinfo.html#pageno" class="tsd-kind-icon">page<wbr>No</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="responseobject.html#status" class="tsd-kind-icon">status</a>
+								<a href="retryinfo.html#retrycount" class="tsd-kind-icon">retry<wbr>Count</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="responseobject.html#statustext" class="tsd-kind-icon">status<wbr>Text</a>
+								<a href="retryinfo.html#status" class="tsd-kind-icon">status</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="responseobject.html#url" class="tsd-kind-icon">url</a>
+								<a href="retryinfo.html#statustext" class="tsd-kind-icon">status<wbr>Text</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="retryinfo.html#url" class="tsd-kind-icon">url</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface">
-						<a href="retryinfo.html" class="tsd-kind-icon">Retry<wbr>Info</a>
-					</li>
 					<li class=" tsd-kind-interface">
 						<a href="scrapeddata.html" class="tsd-kind-icon">Scraped<wbr>Data</a>
 					</li>

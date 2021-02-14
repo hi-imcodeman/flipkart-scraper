@@ -1,7 +1,9 @@
-// const flipkartScraper = require('flipkart-scraper').default
-const flipkartScraper = require('../dist/index').default
+// const { FlipkartScraper } = require('flipkart-scraper')
+const {
+    FlipkartScraper
+} = require('../dist/index')
 
-const scraper = new flipkartScraper(
+const scraper = new FlipkartScraper(
     process.env.FK_AFFILIATE_ID,
     process.env.FK_AFFILIATE_TOKEN)
 
@@ -13,7 +15,7 @@ scraper.on('data', (data) => {
         pageNo: data.pageNo
     });
 })
-scraper.on('completed', info => {
+scraper.on('categoryCompleted', info => {
     console.log('Completed:', info)
 })
 scraper.on('finished', info => {

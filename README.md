@@ -1,5 +1,5 @@
-
 [![NPM](https://nodei.co/npm/flipkart-scraper.png)](https://nodei.co/npm/flipkart-scraper/)
+
 # Flipkart Scraper ![](https://github.com/hi-imcodeman/flipkart-scraper/workflows/CI/badge.svg)
 
 This package will help us to scrape all Flipkart products through Flipkart affiliate API.
@@ -25,9 +25,9 @@ yarn add flipkart-scraper
 ## Usage
 
 ```javascript
-import flipkartScraper from "flipkart-scraper";
+import { FlipkartScraper } from "flipkart-scraper";
 
-const scraper = new flipkartScraper(
+const scraper = new FlipkartScraper(
   "<Affiliate-Id-Here>",
   "<Affiliate-Token-Here>"
 );
@@ -59,7 +59,7 @@ This will create instance of the `FlipkartScraper` class with required authentic
 **Example**
 
 ```javascript
-const scraper = new flipkartScraper(
+const scraper = new FlipkartScraper(
   "<Affiliate-Id-Here>",
   "<Affiliate-Token-Here>",
   {
@@ -119,16 +119,16 @@ scraper.on("data", (data) => {
 });
 ```
 
-### events: 'completed'
+### events: 'categoryCompleted'
 
 Emitted when all products scraped by category.
 
 **Example**
 
 ```javascript
-// 'completed' event handler
-scraper.on("completed", (info) => {
-  console.log(info);
+// 'categoryCompleted' event handler
+scraper.on("categoryCompleted", (completedCategoryInfo) => {
+  console.log(completedCategoryInfo);
 });
 ```
 
@@ -152,8 +152,34 @@ Emitted if any errors occured.
 **Example**
 
 ```javascript
-// Error handler
+// Triggered if any error occured
 scraper.on("error", (error) => {
   console.error(error);
+});
+```
+
+### events: 'retry'
+
+Emitted if any retry occured.
+
+**Example**
+
+```javascript
+// Triggered if any retry occured
+scraper.on("retry", (retryInfo) => {
+  console.log(retryInfo);
+});
+```
+
+### events: 'retryHalted'
+
+Emitted if any retries failed 10 times.
+
+**Example**
+
+```javascript
+// Triggerd when retry failed 10 times
+scraper.on("retryHalted", (retryHaltInfo) => {
+  console.error(retryHaltInfo);
 });
 ```
