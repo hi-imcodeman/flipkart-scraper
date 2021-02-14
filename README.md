@@ -152,7 +152,7 @@ Emitted if any errors occured.
 **Example**
 
 ```javascript
-// Error handler
+// Triggered if any error occured
 scraper.on("error", (error) => {
   console.error(error);
 });
@@ -165,7 +165,7 @@ Emitted if any retry occured.
 **Example**
 
 ```javascript
-// Retry handler
+// Triggered if any retry occured
 scraper.on("retry", (retryInfo) => {
   console.log(retryInfo);
 });
