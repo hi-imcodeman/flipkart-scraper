@@ -30,6 +30,32 @@
                         }
                     },
                     "apiName": "televisions"
+                },
+                "mobiles": {
+                    "availableVariants": {
+                        "v1.1.0": {
+                            "resourceName": "mobiles",
+                            "put": null,
+                            "post": null,
+                            "get": "https://affiliate-api.flipkart.net/affiliate/1.0/feeds/hi-imcodeman/category/c3p1.json",
+                            "deltaGet": null,
+                            "delete": null
+                        }
+                    },
+                    "apiName": "mobiles"
+                },
+                "laptops": {
+                    "availableVariants": {
+                        "v1.1.0": {
+                            "resourceName": "laptops",
+                            "put": null,
+                            "post": null,
+                            "get": "https://affiliate-api.flipkart.net/affiliate/1.0/feeds/hi-imcodeman/category/c4p1.json",
+                            "deltaGet": null,
+                            "delete": null
+                        }
+                    },
+                    "apiName": "laptops"
                 }
             }
         }
