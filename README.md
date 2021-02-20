@@ -105,7 +105,7 @@ This method will show the stasts of scraper. By default stats will come as numer
 /*
 {
     "startTime": "2021-02-20T13:25:21.003Z",
-    "endTime": undefined,
+    "endTime": undefined, // End time will be available once scraping finished
     "status": "inprogress",
     "concurrency": 30,
     "waitingRequests": 0,
