@@ -93,6 +93,51 @@ This method will start scraping through Flipkart affiliate API.
 scraper.start(["telivision", "mobiles"]); // It will scrape only specified categories
 ```
 
+### scraper.stats(showAsNumbers?=false)
+
+This method will show the stasts of scraper. By default stats will come as numerals like (3.1k, 1.45GB)
+
+- `showAsNumbers?` {boolean} Stats will return as number instead of numerals.
+
+**Sample Stats**
+
+```javascript
+/*
+{
+    "startTime": "2021-02-20T13:25:21.003Z",
+    "endTime": undefined,
+    "status": "inprogress",
+    "concurrency": 30,
+    "waitingRequests": 0,
+    "productsCount": "13.03k",
+    "elapsed": "0:00:09 10ms",
+    "durationPerMillionProducts": "0:11:31 428ms",
+    "productsPerSec": "1.45k products/sec",
+    "avgResponseTime": "322ms",
+    "requestPerSec": "3/sec",
+    "requestedCount": "29.00",
+    "processedCount": "28.00",
+    "errorCount": "0.0",
+    "retryCount": "0.0",
+    "retryHaltCount": "0.0",
+    "pendingCategory": 1,
+    "completedCategory": 1,
+    "downloadSize": "69.69MB",
+    "downloadedSpeed": "7.73MB/sec",
+    "info": {
+        "pendingCategories": [
+            "mobiles"
+        ],
+        "completedCategories": [{
+            "category": "laptops",
+            "noOfPages": 10,
+            "totalProducts": 4500
+        }]
+    }
+}
+*/
+```
+
 ### events: 'response'
 
 Emitted when successful HTTP response from the Flipkart Affiliate server.
