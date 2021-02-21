@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ScrapedData | flipkart-scraper - v1.1.0</title>
+	<title>CategoryInfo | flipkart-scraper - v1.1.0</title>
 	<meta name="description" content="Documentation for flipkart-scraper - v1.1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../modules/interfaces.html">interfaces</a>
 				</li>
 				<li>
-					<a href="interfaces.scrapeddata.html">ScrapedData</a>
+					<a href="interfaces.categoryinfo.html">CategoryInfo</a>
 				</li>
 			</ul>
-			<h1>Interface ScrapedData</h1>
+			<h1>Interface CategoryInfo</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +70,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ScrapedData</span>
+						<span class="target">CategoryInfo</span>
 					</li>
 				</ul>
 			</section>
@@ -81,11 +81,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="interfaces.scrapeddata.html#apidata" class="tsd-kind-icon">api<wbr>Data</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="interfaces.scrapeddata.html#category" class="tsd-kind-icon">category</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="interfaces.scrapeddata.html#pageno" class="tsd-kind-icon">page<wbr>No</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="interfaces.scrapeddata.html#retrycount" class="tsd-kind-icon">retry<wbr>Count</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="interfaces.scrapeddata.html#url" class="tsd-kind-icon">url</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="interfaces.categoryinfo.html#category" class="tsd-kind-icon">category</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="interfaces.categoryinfo.html#elapsed" class="tsd-kind-icon">elapsed</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="interfaces.categoryinfo.html#noofpages" class="tsd-kind-icon">no<wbr>OfPages</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="interfaces.categoryinfo.html#totalproducts" class="tsd-kind-icon">total<wbr>Products</a></li>
 							</ul>
 						</section>
 					</div>
@@ -94,52 +93,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="apidata" class="tsd-anchor"></a>
-					<h3>api<wbr>Data</h3>
-					<div class="tsd-signature tsd-kind-icon">api<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/a8648aa/src/interfaces.ts#L68">interfaces.ts:68</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="category" class="tsd-anchor"></a>
 					<h3>category</h3>
 					<div class="tsd-signature tsd-kind-icon">category<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/a8648aa/src/interfaces.ts#L69">interfaces.ts:69</a></li>
+							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/a8648aa/src/interfaces.ts#L75">interfaces.ts:75</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="pageno" class="tsd-anchor"></a>
-					<h3>page<wbr>No</h3>
-					<div class="tsd-signature tsd-kind-icon">page<wbr>No<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="elapsed" class="tsd-anchor"></a>
+					<h3>elapsed</h3>
+					<div class="tsd-signature tsd-kind-icon">elapsed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/a8648aa/src/interfaces.ts#L70">interfaces.ts:70</a></li>
+							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/a8648aa/src/interfaces.ts#L78">interfaces.ts:78</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="retrycount" class="tsd-anchor"></a>
-					<h3>retry<wbr>Count</h3>
-					<div class="tsd-signature tsd-kind-icon">retry<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<a name="noofpages" class="tsd-anchor"></a>
+					<h3>no<wbr>OfPages</h3>
+					<div class="tsd-signature tsd-kind-icon">no<wbr>OfPages<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/a8648aa/src/interfaces.ts#L71">interfaces.ts:71</a></li>
+							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/a8648aa/src/interfaces.ts#L76">interfaces.ts:76</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="url" class="tsd-anchor"></a>
-					<h3>url</h3>
-					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="totalproducts" class="tsd-anchor"></a>
+					<h3>total<wbr>Products</h3>
+					<div class="tsd-signature tsd-kind-icon">total<wbr>Products<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/a8648aa/src/interfaces.ts#L67">interfaces.ts:67</a></li>
+							<li>Defined in <a href="https://github.com/hi-imcodeman/flipkart-scraper/blob/a8648aa/src/interfaces.ts#L77">interfaces.ts:77</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -167,9 +156,27 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
 						<a href="interfaces.categoryinfo.html" class="tsd-kind-icon">Category<wbr>Info</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="interfaces.categoryinfo.html#category" class="tsd-kind-icon">category</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="interfaces.categoryinfo.html#elapsed" class="tsd-kind-icon">elapsed</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="interfaces.categoryinfo.html#noofpages" class="tsd-kind-icon">no<wbr>OfPages</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="interfaces.categoryinfo.html#totalproducts" class="tsd-kind-icon">total<wbr>Products</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="interfaces.finishedinfo.html" class="tsd-kind-icon">Finished<wbr>Info</a>
 					</li>
@@ -182,30 +189,9 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="interfaces.retryinfo.html" class="tsd-kind-icon">Retry<wbr>Info</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="interfaces.scrapeddata.html" class="tsd-kind-icon">Scraped<wbr>Data</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="interfaces.scrapeddata.html#apidata" class="tsd-kind-icon">api<wbr>Data</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="interfaces.scrapeddata.html#category" class="tsd-kind-icon">category</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="interfaces.scrapeddata.html#pageno" class="tsd-kind-icon">page<wbr>No</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="interfaces.scrapeddata.html#retrycount" class="tsd-kind-icon">retry<wbr>Count</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="interfaces.scrapeddata.html#url" class="tsd-kind-icon">url</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="interfaces.scraperoptions.html" class="tsd-kind-icon">Scraper<wbr>Options</a>
 					</li>

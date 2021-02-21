@@ -104,36 +104,52 @@ This method will show the stasts of scraper. By default stats will come as numer
 ```javascript
 /*
 {
-    "startTime": "2021-02-20T13:25:21.003Z",
-    "endTime": undefined, // End time will be available once scraping finished
-    "status": "inprogress",
-    "concurrency": 30,
-    "waitingRequests": 0,
-    "productsCount": "13.03k",
-    "elapsed": "0:00:09 10ms",
-    "durationPerMillionProducts": "0:11:31 428ms",
-    "productsPerSec": "1.45k products/sec",
-    "avgResponseTime": "322ms",
-    "requestPerSec": "3/sec",
-    "requestedCount": "29.00",
-    "processedCount": "28.00",
-    "errorCount": "0.0",
-    "retryCount": "0.0",
-    "retryHaltCount": "0.0",
-    "pendingCategory": 1,
-    "completedCategory": 1,
-    "downloadSize": "69.69MB",
-    "downloadedSpeed": "7.73MB/sec",
-    "info": {
-        "pendingCategories": [
-            "mobiles"
-        ],
-        "completedCategories": [{
-            "category": "laptops",
-            "noOfPages": 10,
-            "totalProducts": 4500
-        }]
-    }
+  "startTime": "2021-02-21T08:14:29.445Z",
+  "endTime": undefined, // endTime will be available once scraping finished
+  "status": "inprogress",
+  "concurrency": 30,
+  "waitingRequests": 0,
+  "productsCount": "19.54k",
+  "elapsed": "0:00:06 10ms",
+  "durationPerMillionProducts": "0:05:08 558ms",
+  "productsPerSec": "3.25k products/sec",
+  "avgResponseTime": "147ms",
+  "requestPerSec": "7/sec",
+  "requestedCount": "43.00",
+  "processedCount": "41.00",
+  "errorCount": "0.0",
+  "retryCount": "0.0",
+  "retryHaltCount": "0.0",
+  "pendingCategory": 2,
+  "completedCategory": 1,
+  "downloadSize": "84.78MB",
+  "downloadedSpeed": "14.11MB/sec",
+  "info": {
+    "pendingCategories": [
+      {
+        "category": "mens_clothing",
+        "startTime": "2021-02-21T08:14:29.602Z",
+        "noOfPages": 18,
+        "elapsed": 5668,
+        "totalProducts": 9000
+      },
+      {
+        "category": "mobiles",
+        "startTime": "2021-02-21T08:14:29.603Z",
+        "noOfPages": 13,
+        "elapsed": 5771,
+        "totalProducts": 6500
+      }
+    ],
+    "completedCategories": [
+      {
+        "category": "laptops",
+        "noOfPages": 10,
+        "totalProducts": 4500,
+        "elapsed": 3878
+      }
+    ]
+  }
 }
 */
 ```
