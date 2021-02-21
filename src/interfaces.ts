@@ -71,12 +71,20 @@ export interface ScrapedData {
     retryCount: number
 }
 
-export interface CompletedCategoryInfo {
+export interface CategoryInfo {
     category: string
     noOfPages: number
     totalProducts: number
+    elapsed: number
 }
 
+export interface PendingCategoryInfo {
+    category: string
+    startTime: Date,
+    noOfPages: number,
+    elapsed: number,
+    totalProducts: number
+}
 export interface FinishedInfo {
     message: string
     totalRequest: number
@@ -89,8 +97,8 @@ export interface RetryInfo extends EnqueuePrams {
 }
 
 export interface StatsInfo {
-    pendingCategories: string[]
-    completedCategories: CompletedCategoryInfo[]
+    pendingCategories: PendingCategoryInfo[]
+    completedCategories: CategoryInfo[]
 }
 
 export interface StatsData {

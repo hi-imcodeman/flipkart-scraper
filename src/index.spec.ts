@@ -180,15 +180,34 @@ describe('Flipkart Scraper', () => {
       "downloadedSpeed": expect.any(String),
       "info": {
         "pendingCategories": [
-          "televisions",
-          "mobiles",
-          "laptops"
+          {
+            "category": "televisions",
+            "startTime": expect.any(Date),
+            "noOfPages": 2,
+            "elapsed": expect.any(Number),
+            "totalProducts": 10
+          },
+          {
+            "category": "mobiles",
+            "startTime": expect.any(Date),
+            "noOfPages": 0,
+            "elapsed": expect.any(Number),
+            "totalProducts": 0
+          },
+          {
+            "category": "laptops",
+            "startTime": expect.any(Date),
+            "noOfPages": 0,
+            "elapsed": expect.any(Number),
+            "totalProducts": 0
+          }
         ],
         "completedCategories": [
           {
             "category": "food_nutrition",
             "noOfPages": 3,
-            "totalProducts": 1000
+            "totalProducts": 1000,
+            "elapsed": expect.any(Number)
           }
         ]
       }
@@ -229,15 +248,34 @@ describe('Flipkart Scraper', () => {
       "downloadedSpeed": expect.any(Number),
       "info": {
         "pendingCategories": [
-          "televisions",
-          "mobiles",
-          "laptops"
+          {
+            "category": "televisions",
+            "startTime": expect.any(Date),
+            "noOfPages": 2,
+            "elapsed": expect.any(Number),
+            "totalProducts": 10
+          },
+          {
+            "category": "mobiles",
+            "startTime": expect.any(Date),
+            "noOfPages": 0,
+            "elapsed": expect.any(Number),
+            "totalProducts": 0
+          },
+          {
+            "category": "laptops",
+            "startTime": expect.any(Date),
+            "noOfPages": 0,
+            "elapsed": expect.any(Number),
+            "totalProducts": 0
+          }
         ],
         "completedCategories": [
           {
             "category": "food_nutrition",
             "noOfPages": 3,
-            "totalProducts": 1000
+            "totalProducts": 1000,
+            "elapsed": expect.any(Number)
           }
         ]
       }
@@ -277,15 +315,34 @@ describe('Flipkart Scraper', () => {
       "downloadedSpeed": expect.any(Number),
       "info": {
         "pendingCategories": [
-          "televisions",
-          "mobiles",
-          "laptops"
+          {
+            "category": "televisions",
+            "startTime": expect.any(Date),
+            "noOfPages": 2,
+            "elapsed": expect.any(Number),
+            "totalProducts": 10
+          },
+          {
+            "category": "mobiles",
+            "startTime": expect.any(Date),
+            "noOfPages": 0,
+            "elapsed": expect.any(Number),
+            "totalProducts": 0
+          },
+          {
+            "category": "laptops",
+            "startTime": expect.any(Date),
+            "noOfPages": 0,
+            "elapsed": expect.any(Number),
+            "totalProducts": 0
+          }
         ],
         "completedCategories": [
           {
             "category": "food_nutrition",
             "noOfPages": 3,
-            "totalProducts": 1000
+            "totalProducts": 1000,
+            "elapsed": expect.any(Number)
           }
         ]
       }

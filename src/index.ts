@@ -10,7 +10,8 @@ import {
     EnqueuePrams,
     ScraperOptions,
     ScrapedData,
-    CompletedCategoryInfo,
+    CategoryInfo,
+    PendingCategoryInfo,
     FinishedInfo,
     RetryInfo,
     StatsData,
@@ -42,7 +43,7 @@ export declare function error(errorObj: AxiosError): void;
  * @memberof FlipkartScraper
  * @event
  */
-export declare function categoryCompleted(completedCategoryInfo: CompletedCategoryInfo): void;
+export declare function categoryCompleted(completedCategoryInfo: CategoryInfo): void;
 
 /** 
  * Emitted when scraper finished
@@ -86,8 +87,8 @@ export class FlipkartScraper extends EventEmitter {
     private _retryCount = 0
     private _errorCount = 0
     private _retryHaltCount = 0
-    private _pendingCategory = []
-    private _completedCategory = []
+    private _pendingCategory: PendingCategoryInfo[] = []
+    private _completedCategory: CategoryInfo[] = []
     private _status: ScraperStatus
     private _downloadSize = 0
 
@@ -190,13 +191,20 @@ export class FlipkartScraper extends EventEmitter {
                 if (key === 'get') {
                     const resourceName: string = parent.resourceName
                     categoryListing[resourceName] = value
+                    const pendingCategoryInfo: PendingCategoryInfo = {
+                        category: resourceName,
+                        startTime: new Date(),
+                        noOfPages: 0,
+                        elapsed: 0,
+                        totalProducts: 0
+                    }
                     if (categoriesToScrape.length) {
                         if (categoriesToScrape.includes(resourceName)) {
-                            this._pendingCategory.push(resourceName)
+                            this._pendingCategory.push(pendingCategoryInfo)
                             this._enqueue({ url: value, pageNo: 1, category: resourceName, retryCount: 0 })
                         }
                     } else {
-                        this._pendingCategory.push(resourceName)
+                        this._pendingCategory.push(pendingCategoryInfo)
                         this._enqueue({ url: value, pageNo: 1, category: resourceName, retryCount: 0 })
                     }
                 }
@@ -256,8 +264,16 @@ export class FlipkartScraper extends EventEmitter {
         this._processedCount++
         if (errorObj === null) {
             const { data: apiData, url } = completedResponse.httpResponse
+            const categoryStats: PendingCategoryInfo = this._pendingCategory.filter(item => item.category === completedResponse.category)[0]
             if (apiData.products.length) {
                 this._totalProductsCount += apiData.products.length
+                this._pendingCategory.forEach((item: PendingCategoryInfo) => {
+                    if (item.category === categoryStats.category) {
+                        item.elapsed = new Date().getTime() - categoryStats.startTime.getTime()
+                        item.totalProducts += apiData.products.length
+                        item.noOfPages += 1
+                    }
+                })
                 this.emit('data', {
                     url,
                     apiData,
@@ -271,12 +287,14 @@ export class FlipkartScraper extends EventEmitter {
                     this._enqueue({ url: apiData.nextUrl, category: completedResponse.category, pageNo: completedResponse.pageNo + 1, retryCount: 0 })
             }
             else {
-                const completedInfo: CompletedCategoryInfo = {
+                const elapsed = new Date().getTime() - categoryStats.startTime.getTime()
+                const completedInfo: CategoryInfo = {
                     category: completedResponse.category,
                     noOfPages: completedResponse.pageNo,
                     totalProducts: apiData.products.length + ((completedResponse.pageNo - 1) * 500),
+                    elapsed
                 }
-                this._pendingCategory = this._pendingCategory.filter(item => item !== completedResponse.category)
+                this._pendingCategory = this._pendingCategory.filter(item => item.category !== completedResponse.category)
                 this._completedCategory.push(completedInfo)
                 this.emit('categoryCompleted', completedInfo)
             }
