@@ -1,7 +1,5 @@
 import { FlipkartScraper } from './index'
 
-jest.setTimeout(999999)
-
 describe('Flipkart Scraper', () => {
   afterEach(() => {
     jest.clearAllMocks();
