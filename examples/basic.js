@@ -21,10 +21,22 @@ scraper.on('response', response => {
 scraper.on('categoryCompleted', info => {
     console.log('Completed:', info)
 })
+scraper.on('retry', retryInfo => {
+    console.log('Retry:', retryInfo)
+})
+scraper.on('retryHalted', retryHaltedInfo => {
+    console.log('Retry Halted:', retryHaltedInfo)
+})
 scraper.on('finished', info => {
     console.log('Scraping finished:', info)
 })
 scraper.on('error', error => {
     console.error(error);
 })
-scraper.start().catch(err => {})
+
+scraper.start().catch(console.error)
+
+// To get stats of the scraper
+setInterval(() => {
+    console.log(JSON.stringify(scraper.stats(), null, 2))
+}, 1000)
