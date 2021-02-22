@@ -31,4 +31,4 @@ scraper.on('error', error => {
     console.error(error);
 
 })
-scraper.start().catch(err => {})
+scraper.start().catch(console.error)

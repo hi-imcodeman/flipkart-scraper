@@ -25,4 +25,4 @@ scraper.on('error', error => {
     console.error(error);
 
 })
-scraper.start(['mobiles', 'televisions']).catch(err => {})
+scraper.start(['mobiles', 'televisions']).catch(console.error)
