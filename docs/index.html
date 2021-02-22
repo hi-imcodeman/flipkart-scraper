@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>flipkart-scraper - v1.1.0</title>
-	<meta name="description" content="Documentation for flipkart-scraper - v1.1.0">
+	<title>flipkart-scraper - v2.0.0</title>
+	<meta name="description" content="Documentation for flipkart-scraper - v2.0.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script async src="assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">flipkart-scraper - v1.1.0</a>
+					<a href="index.html" class="title">flipkart-scraper - v2.0.0</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -48,7 +48,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<h1>flipkart-scraper - v1.1.0</h1>
+			<h1>flipkart-scraper - v2.0.0</h1>
 		</div>
 	</div>
 </header>
@@ -144,7 +144,7 @@
 				<a href="#scraperstatsshowasnumbersfalse" id="scraperstatsshowasnumbersfalse" style="color: inherit; text-decoration: none;">
 					<h3>scraper.stats(showAsNumbers?=false)</h3>
 				</a>
-				<p>This method will show the stasts of scraper. By default stats will come as numerals like (3.1k, 1.45GB)</p>
+				<p>This method will show the stats of scraper. By default stats will come as numerals like (3.1k, 1.45GB)</p>
 				<ul>
 					<li><code>showAsNumbers?</code> {boolean} Stats will return as number instead of numerals.</li>
 				</ul>
@@ -223,7 +223,7 @@
 				<a href="#events-39categorycompleted39" id="events-39categorycompleted39" style="color: inherit; text-decoration: none;">
 					<h3>events: &#39;categoryCompleted&#39;</h3>
 				</a>
-				<p>Emitted when all products scraped by category.</p>
+				<p>Emitted when all products scraped for the category.</p>
 				<p><strong>Example</strong></p>
 				<pre><code class="language-javascript"><span style="color: #008000">// &#039;categoryCompleted&#039; event handler</span>
 <span style="color: #001080">scraper</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;categoryCompleted&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">completedCategoryInfo</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
@@ -233,7 +233,7 @@
 				<a href="#events-39finished39" id="events-39finished39" style="color: inherit; text-decoration: none;">
 					<h3>events: &#39;finished&#39;</h3>
 				</a>
-				<p>Emitted when scraper finished</p>
+				<p>Emitted when scraper finished.</p>
 				<p><strong>Example</strong></p>
 				<pre><code class="language-javascript"><span style="color: #008000">// &#039;finished&#039; event handler</span>
 <span style="color: #001080">scraper</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;finished&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">info</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
@@ -263,7 +263,7 @@
 				<a href="#events-39retryhalted39" id="events-39retryhalted39" style="color: inherit; text-decoration: none;">
 					<h3>events: &#39;retryHalted&#39;</h3>
 				</a>
-				<p>Emitted if any retries failed 10 times.</p>
+				<p>Emitted if any retries failed for 10 times.</p>
 				<p><strong>Example</strong></p>
 				<pre><code class="language-javascript"><span style="color: #008000">// Triggerd when retry failed 10 times</span>
 <span style="color: #001080">scraper</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;retryHalted&quot;</span><span style="color: #000000">, (</span><span style="color: #001080">retryHaltInfo</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>

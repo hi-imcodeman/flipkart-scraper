@@ -95,7 +95,7 @@ scraper.start(["telivision", "mobiles"]); // It will scrape only specified categ
 
 ### scraper.stats(showAsNumbers?=false)
 
-This method will show the stasts of scraper. By default stats will come as numerals like (3.1k, 1.45GB)
+This method will show the stats of scraper. By default stats will come as numerals like (3.1k, 1.45GB)
 
 - `showAsNumbers?` {boolean} Stats will return as number instead of numerals.
 
@@ -182,7 +182,7 @@ scraper.on("data", (data) => {
 
 ### events: 'categoryCompleted'
 
-Emitted when all products scraped by category.
+Emitted when all products scraped for the category.
 
 **Example**
 
@@ -195,7 +195,7 @@ scraper.on("categoryCompleted", (completedCategoryInfo) => {
 
 ### events: 'finished'
 
-Emitted when scraper finished
+Emitted when scraper finished.
 
 **Example**
 
@@ -234,7 +234,7 @@ scraper.on("retry", (retryInfo) => {
 
 ### events: 'retryHalted'
 
-Emitted if any retries failed 10 times.
+Emitted if any retries failed for 10 times.
 
 **Example**
 
