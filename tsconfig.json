@@ -19,7 +19,9 @@
     "includeVersion": true,
     "excludePrivate": true,
     "excludeExternals": true,
-    "entryPoints": ["./src/index.ts"],
+    "excludeInternal": true,
+    "exclude": ["**/*+(util|.spec|.e2e).ts","**/__mocks__"],
+    "entryPoints": ["src"],
     "out": "docs"
   }
 }

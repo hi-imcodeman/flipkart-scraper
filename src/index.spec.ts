@@ -1,7 +1,9 @@
 import { FlipkartScraper } from './index'
-jest.setTimeout(999999)
 
 describe('Flipkart Scraper', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  })
   it('should get response from the flipkart affiliate API', async (done) => {
     const scraper = new FlipkartScraper(
       "hi-imcodeman",
@@ -18,6 +20,24 @@ describe('Flipkart Scraper', () => {
     expect(dataSpy).toBeCalledTimes(4)
     expect(errorSpy).toBeCalledTimes(23)
     done()
+  })
+
+  it('should throw error when stating the scraper while scraping inprogress', async (done) => {
+    const scraper = new FlipkartScraper(
+      "hi-imcodeman",
+      "f44755229c5f11eabb370242ac130002"
+    );
+    const expectedErrorObj = {
+      currentStaus: 'inprogress',
+      message: 'Scraping already started. Check the status before start new scraping.'
+    }
+    const errorSpy = jest.fn()
+    scraper.on('error', errorSpy)
+    scraper.start();
+    scraper.start().catch(error => {
+      expect(error).toEqual(expectedErrorObj)
+      done()
+    });
   })
 
   it('should scrape only number of endpoints based on maxRequest', async (done) => {
@@ -133,6 +153,212 @@ describe('Flipkart Scraper', () => {
     expect(errorSpy).toBeCalledTimes(1)
     expect(retryHaltedSpy).toBeCalledTimes(1)
     done()
+  })
+  it('should return expected stats in readable format', async (done) => {
+    const expectedStats = {
+      "startTime": expect.any(Date),
+      "endTime": expect.any(Date),
+      "status": "finished",
+      "concurrency": 2,
+      "waitingRequests": 0,
+      "productsCount": "20.00",
+      "elapsed": expect.any(String),
+      "durationPerMillionProducts": expect.any(String),
+      "productsPerSec": "20.00 products/sec",
+      "avgResponseTime": "36ms",
+      "requestPerSec": "28/sec",
+      "requestedCount": "28.00",
+      "processedCount": "28.00",
+      "errorCount": "23.0",
+      "retryCount": "20.0",
+      "retryHaltCount": "3.0",
+      "pendingCategory": 3,
+      "completedCategory": 1,
+      "downloadSize": "61.10KB",
+      "downloadedSpeed": expect.any(String),
+      "info": {
+        "pendingCategories": [
+          {
+            "category": "televisions",
+            "startTime": expect.any(Date),
+            "noOfPages": 2,
+            "elapsed": expect.any(Number),
+            "totalProducts": 10
+          },
+          {
+            "category": "mobiles",
+            "startTime": expect.any(Date),
+            "noOfPages": 0,
+            "elapsed": expect.any(Number),
+            "totalProducts": 0
+          },
+          {
+            "category": "laptops",
+            "startTime": expect.any(Date),
+            "noOfPages": 0,
+            "elapsed": expect.any(Number),
+            "totalProducts": 0
+          }
+        ],
+        "completedCategories": [
+          {
+            "category": "food_nutrition",
+            "noOfPages": 3,
+            "totalProducts": 1000,
+            "elapsed": expect.any(Number)
+          }
+        ]
+      }
+    }
+    const scraper = new FlipkartScraper(
+      "hi-imcodeman",
+      "f44755229c5f11eabb370242ac130002"
+    );
+    scraper.on('finished', () => {
+      const stats = scraper.stats()
+      expect(stats).toEqual(expectedStats)
+      done()
+    })
+    scraper.on('error', jest.fn)
+    await scraper.start();
+  })
+  it('should return expected stats in numbers', async (done) => {
+    const expectedStats = {
+      "startTime": expect.any(Date),
+      "endTime": expect.any(Date),
+      "status": "finished",
+      "concurrency": 2,
+      "waitingRequests": 0,
+      "productsCount": 20,
+      "elapsed": expect.any(Number),
+      "durationPerMillionProducts": expect.any(Number),
+      "productsPerSec": 20,
+      "avgResponseTime": 36,
+      "requestPerSec": 28,
+      "requestedCount": 28,
+      "processedCount": 28,
+      "errorCount": 23,
+      "retryCount": 20,
+      "retryHaltCount": 3,
+      "pendingCategory": 3,
+      "completedCategory": 1,
+      "downloadSize": 61103,
+      "downloadedSpeed": expect.any(Number),
+      "info": {
+        "pendingCategories": [
+          {
+            "category": "televisions",
+            "startTime": expect.any(Date),
+            "noOfPages": 2,
+            "elapsed": expect.any(Number),
+            "totalProducts": 10
+          },
+          {
+            "category": "mobiles",
+            "startTime": expect.any(Date),
+            "noOfPages": 0,
+            "elapsed": expect.any(Number),
+            "totalProducts": 0
+          },
+          {
+            "category": "laptops",
+            "startTime": expect.any(Date),
+            "noOfPages": 0,
+            "elapsed": expect.any(Number),
+            "totalProducts": 0
+          }
+        ],
+        "completedCategories": [
+          {
+            "category": "food_nutrition",
+            "noOfPages": 3,
+            "totalProducts": 1000,
+            "elapsed": expect.any(Number)
+          }
+        ]
+      }
+    }
+    const scraper = new FlipkartScraper(
+      "hi-imcodeman",
+      "f44755229c5f11eabb370242ac130002"
+    );
+    scraper.on('finished', () => {
+      const stats = scraper.stats(true)
+      expect(stats).toEqual(expectedStats)
+      done()
+    })
+    scraper.on('error', jest.fn)
+    await scraper.start();
+  })
+  it('should return expected stats in numbers before finished', async (done) => {
+    const expectedStats = {
+      "startTime": expect.any(Date),
+      "status": "inprogress",
+      "concurrency": 2,
+      "waitingRequests": 0,
+      "productsCount": 20,
+      "elapsed": expect.any(Number),
+      "durationPerMillionProducts": expect.any(Number),
+      "productsPerSec": expect.any(Number),
+      "avgResponseTime": 4,
+      "requestPerSec": expect.any(Number),
+      "requestedCount": 28,
+      "processedCount": 28,
+      "errorCount": 23,
+      "retryCount": 20,
+      "retryHaltCount": 3,
+      "pendingCategory": 3,
+      "completedCategory": 1,
+      "downloadSize": 61103,
+      "downloadedSpeed": expect.any(Number),
+      "info": {
+        "pendingCategories": [
+          {
+            "category": "televisions",
+            "startTime": expect.any(Date),
+            "noOfPages": 2,
+            "elapsed": expect.any(Number),
+            "totalProducts": 10
+          },
+          {
+            "category": "mobiles",
+            "startTime": expect.any(Date),
+            "noOfPages": 0,
+            "elapsed": expect.any(Number),
+            "totalProducts": 0
+          },
+          {
+            "category": "laptops",
+            "startTime": expect.any(Date),
+            "noOfPages": 0,
+            "elapsed": expect.any(Number),
+            "totalProducts": 0
+          }
+        ],
+        "completedCategories": [
+          {
+            "category": "food_nutrition",
+            "noOfPages": 3,
+            "totalProducts": 1000,
+            "elapsed": expect.any(Number)
+          }
+        ]
+      }
+    }
+    const scraper = new FlipkartScraper(
+      "hi-imcodeman",
+      "f44755229c5f11eabb370242ac130002"
+    );
+    scraper.on('error', jest.fn)
+    const statsBeforeStart = scraper.stats()
+    expect(statsBeforeStart.startTime).toBeUndefined()
+    expect(statsBeforeStart.status).toBe('ready')
+    scraper.start();
+    setTimeout(() => {
+      const stats = scraper.stats(true)
+      expect(stats).toEqual(expectedStats)
+      done()
+    }, 100)
   })
   it('should throw 401 HTTP error on invalid affiliate id/token', async (done) => {
     const scraper = new FlipkartScraper(

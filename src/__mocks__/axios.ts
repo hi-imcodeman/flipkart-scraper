@@ -4,7 +4,7 @@ import c1p2 from './fixtures/c1p2.json'
 import c1p3 from './fixtures/c1p3.json'
 import c2p1 from './fixtures/c2p1.json'
 import c2p2 from './fixtures/c2p2.json'
-import axios, { AxiosRequestConfig } from 'axios'
+import { AxiosRequestConfig } from 'axios'
 const mockAxios: any = jest.genMockFromModule('axios')
 
 mockAxios.get = (url: string, config: AxiosRequestConfig) => {

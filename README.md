@@ -93,6 +93,67 @@ This method will start scraping through Flipkart affiliate API.
 scraper.start(["telivision", "mobiles"]); // It will scrape only specified categories
 ```
 
+### scraper.stats(showAsNumbers?=false)
+
+This method will show the stasts of scraper. By default stats will come as numerals like (3.1k, 1.45GB)
+
+- `showAsNumbers?` {boolean} Stats will return as number instead of numerals.
+
+**Sample Stats**
+
+```javascript
+/*
+{
+  "startTime": "2021-02-21T08:14:29.445Z",
+  "endTime": undefined, // endTime will be available once scraping finished
+  "status": "inprogress",
+  "concurrency": 30,
+  "waitingRequests": 0,
+  "productsCount": "19.54k",
+  "elapsed": "0:00:06 10ms",
+  "durationPerMillionProducts": "0:05:08 558ms",
+  "productsPerSec": "3.25k products/sec",
+  "avgResponseTime": "147ms",
+  "requestPerSec": "7/sec",
+  "requestedCount": "43.00",
+  "processedCount": "41.00",
+  "errorCount": "0.0",
+  "retryCount": "0.0",
+  "retryHaltCount": "0.0",
+  "pendingCategory": 2,
+  "completedCategory": 1,
+  "downloadSize": "84.78MB",
+  "downloadedSpeed": "14.11MB/sec",
+  "info": {
+    "pendingCategories": [
+      {
+        "category": "mens_clothing",
+        "startTime": "2021-02-21T08:14:29.602Z",
+        "noOfPages": 18,
+        "elapsed": 5668,
+        "totalProducts": 9000
+      },
+      {
+        "category": "mobiles",
+        "startTime": "2021-02-21T08:14:29.603Z",
+        "noOfPages": 13,
+        "elapsed": 5771,
+        "totalProducts": 6500
+      }
+    ],
+    "completedCategories": [
+      {
+        "category": "laptops",
+        "noOfPages": 10,
+        "totalProducts": 4500,
+        "elapsed": 3878
+      }
+    ]
+  }
+}
+*/
+```
+
 ### events: 'response'
 
 Emitted when successful HTTP response from the Flipkart Affiliate server.
